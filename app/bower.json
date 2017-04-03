@@ -1,0 +1,21 @@
+{
+  "name": "nota",
+  "description": "bower nota",
+  "main": "",
+  "authors": [
+    "Ionic Framework"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/eecs394-s17/navy_sample_app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngCordova": "^0.1.27-alpha",
+    "s3-image-uploader": "^1.3.0"
+  }
+}

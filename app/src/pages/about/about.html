@@ -1,0 +1,63 @@
+
+<script src="lib/s3-image-uploader/dist/image-uploader.min.js"></script>
+<script type="text/javascript">
+
+.controller('UploadController', function ($scope){
+  var imageUploader = new ImageUploader();
+  $scope.file = {};
+  $scope.upload = function() {
+    imageUploader.push($scope.file, function(data){
+      console.log('File uploaded Successfully', $scope.file, data);
+      $scope.uploadUri = data.url;
+      $scope.$digest();
+    });
+  };
+})
+</script>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Upload File
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<input type="file" ng-model="file" ng-change="selectfile()">
+<ion-list>
+
+  <ion-item>
+    <ion-label floating>Filename</ion-label>
+    <ion-input type="file" value="test.txt"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Lecture</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Class</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Price</ion-label>
+    <ion-input type="number"></ion-input>
+  </ion-item>
+
+</ion-list>
+
+
+<ion-content padding>
+  <button ion-button color="secondary" block (click)="doPrompt()">Upload</button>
+</ion-content>
+
+</ion-content>
+
+
+
+
+
