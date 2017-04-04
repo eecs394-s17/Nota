@@ -12,6 +12,11 @@ $ npm install -g cordova ionic
 $ npm install --save --save-peers
 ```
 
+* run this also
+```
+$ npm install ionic-native --save
+```
+
 ## Run
 * start the dev server
 ```
