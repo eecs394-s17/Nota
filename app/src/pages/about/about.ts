@@ -5,12 +5,14 @@ import { NavController } from 'ionic-angular';
 
 import {UploadingPage} from '../uploading/uploading';
 
+
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
 })
 export class AboutPage {
 	images: Array<string> = [];
+
 	uploadingPage = UploadingPage;
   constructor(private plugins: Plugins, private navCtrl: NavController) {
 
@@ -38,7 +40,9 @@ export class AboutPage {
     startUploading = () : void => {
       this.navCtrl.setRoot(UploadingPage, {
           images: this.images
-      });}  
+      });
+      console.log(this.images);
+      }  
 
 
 }
