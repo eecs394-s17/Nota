@@ -12,7 +12,7 @@ import {UploadingPage} from '../uploading/uploading';
 })
 export class AboutPage {
 	images: Array<string> = [];
-
+	public base64Image: string;
 	uploadingPage = UploadingPage;
   constructor(private plugins: Plugins, private navCtrl: NavController) {
 
@@ -21,11 +21,9 @@ export class AboutPage {
 
    openAlbums = () : void => {
         this.plugins.albums.open().then((imgUrls) => {            
-            imgUrls.forEach((imageUrl: string) : void => {
-                if(imageUrl){                  
-                  this.images.push(imageUrl);
-                }
-            }); 
+            if(imgUrls) {
+            this.images.push(imgUrls);            
+          } 
         });        
     }
       

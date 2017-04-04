@@ -44,20 +44,32 @@
 
 <ion-content padding>
 
-<input type="file" ng-model="file" ng-change="selectfile()">
+<!-- <input type="file" ng-model="file" ng-change="selectfile()"> -->
 
-<button dark (click)="openCamera()">                
+<ion-buttons>
+      <button style="float:left; position:relative" ion-button icon-only (click) = "openCamera()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+</ion-buttons>
+
+<ion-buttons>
+      <button style="float:left; position:relative" ion-button icon-only (click) = "openAlbums()">
+        <ion-icon name="images"></ion-icon>
+      </button>
+</ion-buttons>
+
+<!-- <button dark (click)="openCamera()">                
   Open camera
 </button>
 
  <button dark (click)="openAlbums()">                
     Open albums
-</button>
+</button> -->
 <ion-list>
 
   <ion-item>
-    <ion-label floating>Filename</ion-label>
-    <ion-input type="file" value="test.txt"></ion-input>
+    <ion-label floating>Name</ion-label>
+    <ion-input type="file"></ion-input>
   </ion-item>
 
   <ion-item>
