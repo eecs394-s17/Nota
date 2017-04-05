@@ -48,27 +48,20 @@
 
 <ion-content padding>
 
-<!-- <input type="file" ng-model="file" ng-change="selectfile()"> -->
-
-<ion-buttons>
-      <button style="float:left; position:relative" ion-button icon-only (click) = "openCamera()">
+<div text-center> <!-- alignment not working -->
+<ion-buttons style="align-items: center">
+      <button ion-button icon-only (click) = "openCamera()">
         <ion-icon name="camera"></ion-icon>
       </button>
 </ion-buttons>
 
 <ion-buttons>
-      <button style="float:left; position:relative" ion-button icon-only (click) = "openAlbums()">
+      <button ion-button icon-only (click) = "openAlbums()">
         <ion-icon name="images"></ion-icon>
       </button>
 </ion-buttons>
+</div>
 
-<!-- <button dark (click)="openCamera()">                
-  Open camera
-</button>
-
- <button dark (click)="openAlbums()">                
-    Open albums
-</button> -->
 <ion-list>
 
   <ion-item>
@@ -93,6 +86,9 @@
 
 </ion-list>
 
+<ion-item id="preview">
+  
+</ion-item>
 
 <ion-content padding>
 <!--startUploading()-->
