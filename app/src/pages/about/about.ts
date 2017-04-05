@@ -24,7 +24,7 @@ export class AboutPage {
 
   constructor(private http: Http, private navCtrl: NavController, private plugins: Plugins) {
   	this.http = http;
-  	this.navCtrl = nav;
+  	this.navCtrl = navCtrl;
 
   }
 
