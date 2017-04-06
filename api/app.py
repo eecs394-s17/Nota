@@ -43,6 +43,10 @@ class Notes(Resource):
 
         images = []
         for note in notes:
+
+            if len(note) <= 0:
+                continue
+
             note_path = note[0] # just cuz its csv
             with open(note_path, "rb") as f:
                 data = f.read()
