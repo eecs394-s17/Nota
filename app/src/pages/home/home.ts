@@ -14,11 +14,23 @@ import 'rxjs/add/operator/map'
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+// AKA NotesPage
 export class HomePage {
 	notes: Array<string> = [];
+  items: Array<{courseName: string, userName: string, date: string, price: string, note: string}>;
 	posts: any;
 
-  constructor(public navCtrl: NavController, public http: Http, public plt: Platform) {
+  constructor(public navCtrl: NavController, public http: Http, public plt: Platform,) {
+    this.items = [];
+    for (let i = 1; i < 4; i++) {
+      this.items.push({
+        courseName: "Kyu's EECS-394 Lecture Note # "+ i,
+        userName: 'Kyu',
+        date: "Apr "+ i +", 2017",
+        price: '$'+ i,
+        note: 'This is where the notes text goes. This is Leture #' + i
+      });
+    }
 
   	this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
@@ -28,9 +40,17 @@ export class HomePage {
       		this.notes.push(res["notes"]); // Stores notes data from get request in notes
       		console.log(this.notes);
       	});
-      
+
     });
 
+
+  }
+
+  itemTapped(event, item) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(HomePage, {
+      item: item
+    });
   }
 
 
@@ -39,7 +59,7 @@ export class HomePage {
   //     //     images: this.images
   //     // });
   //     console.log(this.test);
-  //     }  
+  //     }
 
 
 
