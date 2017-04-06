@@ -19,8 +19,11 @@ class Notes(Resource):
 
         self.notes_filepath = "notes.csv"
         self.parser = reqparse.RequestParser()
-        self.parser.add_argument('notes', type=str, required=True)
-
+        self.parser.add_argument("name", type=str, required=True)
+        self.parser.add_argument("lecture", type=str, required=True)
+        self.parser.add_argument("class", type=str, required=True)
+        self.parser.add_argument("price", type=str, required=True)
+        self.parser.add_argument("notes", type=str, required=True)
 
     def get(self):
         """
@@ -29,7 +32,7 @@ class Notes(Resource):
         """
         notes = []
 
-        with open(self.notes_filepath, 'rb') as csvfile:
+        with open(self.notes_filepath, "rb") as csvfile:
                     reader = csv.reader(csvfile)
                     for row in reader:
                         # TODO: strip excess spaces
@@ -56,6 +59,10 @@ class Notes(Resource):
         """
 
         args = self.parser.parse_args()
+        name = args["name"]
+        lecture = args["lecture"]
+        course = args["class"] # course because class is keyword
+        price = args["price"]
         notes = args["notes"]
 
         # try to save base64 image
