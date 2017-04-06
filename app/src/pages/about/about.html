@@ -64,28 +64,29 @@
 </ion-buttons>
 </div>
 
+
 <ion-list>
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label floating>Title</ion-label>
+      <ion-input formControlName="title" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Name</ion-label>
-    <ion-input type="file"></ion-input>
-  </ion-item>
+<!-- TODO: Add department drop down menu? + change class to dropdown?-->
 
-  <ion-item>
-    <ion-label floating>Lecture</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Class</ion-label>
+      <ion-input formControlName="class" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Class</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label floating>Price</ion-label>
+      <ion-input formControlName="price" type="number"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>Price</ion-label>
-    <ion-input type="number"></ion-input>
-  </ion-item>
+      <button [navPush]="uploadingPage" type="submit" ion-button block color="secondary" (click)="makePostRequest()">Upload</button>
 
+  </form>
 </ion-list>
 
 <ion-item id="preview">
@@ -94,7 +95,6 @@
 
 <ion-content padding>
 <!--startUploading()-->
-  <button [navPush]="uploadingPage" ion-button block color="secondary" (click)="makePostRequest()">Upload</button>
 </ion-content>
 
 </ion-content>

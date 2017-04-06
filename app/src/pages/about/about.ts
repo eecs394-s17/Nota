@@ -1,5 +1,6 @@
 import { Plugins } from '../../services/plugins.service';
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { NavController } from 'ionic-angular';
 
@@ -19,10 +20,16 @@ import {UploadingPage} from '../uploading/uploading';
 })
 export class AboutPage {
 	images: Array<string> = [];
-	public base64Image: string;
+	public base64Image: string; //unused var, delete?
+	public form = this.fb.group({
+		title: ["", Validators.required],
+    	class: ["", Validators.required], //validator not working because submit button fires post function on click
+    	// class: ["", Validators.required],
+    	price: ["", Validators.required]
+	});
 	uploadingPage = UploadingPage;
 
-  constructor(private http: Http, private navCtrl: NavController, private plugins: Plugins) {
+  constructor(private http: Http, private navCtrl: NavController, private plugins: Plugins, public fb: FormBuilder) {
   	this.http = http;
   	this.navCtrl = navCtrl;
 
@@ -58,9 +65,17 @@ export class AboutPage {
 
 makePostRequest() {
 	var data1 = {
-				'notes': this.images[0]
+				'notes': this.images[0],
+				'title': this.form.value.title,
+				'class': this.form.value.class,
+				'price': this.form.value.price
+				//need user 
+
     };
     console.log(this.images[0]);
+
+    console.log(data1);
+
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+this.images[0]+ "'>";
 
