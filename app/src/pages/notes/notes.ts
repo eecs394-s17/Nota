@@ -12,10 +12,10 @@ import 'rxjs/add/operator/map'
 import { NoteViewPage } from '../note-view/note-view';
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'notes.html'
 })
 // AKA NotesPage
-export class HomePage {
+export class NotesPage {
 	notes: Array<string> = [];
   items: Array<{courseName: string, userName: string, date: string, price: string, note: string}>;
 	posts: any;
@@ -54,7 +54,7 @@ export class HomePage {
 
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
-    this.navCtrl.push(HomePage, {
+    this.navCtrl.push(NotesPage, {
       item: item
     });
   }
