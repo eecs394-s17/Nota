@@ -36,7 +36,6 @@ class Notes(Resource):
 
     def __init__(self):
 
-        self.notes_filepath = "notes.csv"
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("name", type=str, required=True)
         self.parser.add_argument("lecture", type=str, required=True)
@@ -63,6 +62,7 @@ class Notes(Resource):
             name = 4
 
             with open(row[note_path], "rb") as f:
+
                 data = f.read()
                 notes_data = base64.encodestring(data)
 
