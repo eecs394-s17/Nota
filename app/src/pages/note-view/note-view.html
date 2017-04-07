@@ -15,6 +15,7 @@
 
 <ion-content padding>
   <p>{{courseName}}</p>
-  <img src="data:image/jpeg;base64, {{note}}">
+  <!-- <p>{{note}} fdf</p> -->
+  <img [src]="_DomSanitizationService.bypassSecurityTrustUrl("data:image/jpeg;base64,{{note}}")/>
 
 </ion-content>

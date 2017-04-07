@@ -3,6 +3,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 
+
 import { dataSrvc } from './data.service';
 
 import 'rxjs/add/operator/map'
@@ -26,19 +27,19 @@ export class NoteViewPage {
   note:string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
-    this.plt.ready().then((readySource) => {
-      console.log('Platform ready from', readySource);
-      this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes")
-        .subscribe(data => {
-          var res = data.json();
-          // this.items.push( { courseName: res['courseName'],}) etc.
-          this.note = res["notes"];
-          //this.notes.push(res["notes"]); // Stores notes data from get request in notes
-          console.log('yay notes in note-view')
-  })
+//     this.plt.ready().then((readySource) => {
+//       console.log('Platform ready from', readySource);
+//       this.http.get("http://127.0.0.1:5000/api/v1/notes")
+//         .subscribe(data => {
+//           var res = data.json();
+//           // this.items.push( { courseName: res['courseName'],}) etc.
+//           this.note = res["all_notes"];
+//           //this.notes.push(res["notes"]); // Stores notes data from get request in notes
+//           console.log('yay notes in note-view')
+//   })
 
 
-})
+// })
   };
 
   ionViewDidLoad() {
@@ -49,6 +50,7 @@ export class NoteViewPage {
     this.price = this.navParams.get('price');
     this.note = this.navParams.get('note');
     console.log("note is...: ");
+    console.log(this.note);
   }
 
 

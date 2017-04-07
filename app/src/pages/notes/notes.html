@@ -6,32 +6,19 @@
 
 
 
-<ion-content padding>
+<ion-content no-padding>
 
 
 
-<ion-list>
-  <ion-item *ngFor="let item of items">
+<ion-list no-lines>
+<button ion-item *ngFor="let item of items" (click)="launchNoteViewPage(item)">
     <h2> {{item.courseName}}</h2>
     <p>  {{item.userName}}</p>
     <p>  {{item.date}}</p>
     <p>  {{item.price}}</p>
-    <button ion-button clear item-right (click)="launchNoteViewPage(item)">View</button>
-  </ion-item>
-  <ion-item>
-    <h2 >Kyu's EECS394 Lecture 1 Notes</h2>
-    <p>Kyu</p>
-    <p>Apr 4, 2017</p>
-    <p>$2</p>
-    <button ion-button clear item-right>View</button>
-  </ion-item>
-  <ion-item>
-    <h2 id="test">Ryan's EECS203 Lecture 1 Notes</h2>
-    <p>Ryan</p>
-    <p>Apr 2, 2017</p>
-    <p>$15</p>
-    <button ion-button clear item-right>View</button>
-  </ion-item>
+</button>
+
+ 
   <ion-item>
     <h2>Sam's IEMS302 Lecture 2 Notes</h2>
     <p>Sam</p>
@@ -39,7 +26,7 @@
     <p>$10</p>
     <button ion-button clear item-right>View</button>
   </ion-item>
-  <ion-item>
+  <ion-item sliding>
     <h2>John's IEMS302 Lecture 3 Notes</h2>
     <p>John</p>
     <p>Apr 1, 2017</p>

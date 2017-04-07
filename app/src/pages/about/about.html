@@ -75,8 +75,13 @@
 <!-- TODO: Add department drop down menu? + change class to dropdown?-->
 
     <ion-item>
-      <ion-label floating>Class</ion-label>
-      <ion-input formControlName="class" type="text"></ion-input>
+      <ion-label floating>Course</ion-label>
+      <ion-input formControlName="course" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Lecture</ion-label>
+      <ion-input formControlName="lecture" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -85,7 +90,6 @@
     </ion-item>
 
       <button [navPush]="uploadingPage" type="submit" ion-button block color="secondary" (click)="makePostRequest()">Upload</button>
-
   </form>
 </ion-list>
 
