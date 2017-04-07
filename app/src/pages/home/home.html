@@ -10,14 +10,13 @@
 
 
 
-
 <ion-list>
   <ion-item *ngFor="let item of items">
     <h2> {{item.courseName}}</h2>
     <p>  {{item.userName}}</p>
     <p>  {{item.date}}</p>
     <p>  {{item.price}}</p>
-    <button ion-button clear item-right (click)="itemTapped($event,item)">View</button>
+    <button ion-button clear item-right (click)="launchNoteViewPage(item)">View</button>
   </ion-item>
   <ion-item>
     <h2 >Kyu's EECS394 Lecture 1 Notes</h2>

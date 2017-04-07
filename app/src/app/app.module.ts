@@ -6,10 +6,12 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { NoteViewPage } from '../pages/note-view/note-view'
+import {UploadingPage} from "../pages/uploading/uploading";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {UploadingPage} from "../pages/uploading/uploading";
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import {UploadingPage} from "../pages/uploading/uploading";
     ContactPage,
     HomePage,
     TabsPage,
-    UploadingPage
+    UploadingPage,
+    NoteViewPage
 
   ],
   imports: [
@@ -31,7 +34,8 @@ import {UploadingPage} from "../pages/uploading/uploading";
     ContactPage,
     HomePage,
     TabsPage,
-    UploadingPage
+    UploadingPage,
+    NoteViewPage
   ],
   providers: [
     StatusBar,

@@ -9,7 +9,7 @@ import { Http } from '@angular/http';
 import { dataSrvc } from './data.service';
 
 import 'rxjs/add/operator/map'
-
+import { NoteViewPage } from '../note-view/note-view';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -37,13 +37,19 @@ export class HomePage {
       this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes")
       	.subscribe(data => {
       		var res = data.json();
+      		// this.items.push( { courseName: res['courseName'],}) etc.
+          this.items[0].note = res["notes"];
       		this.notes.push(res["notes"]); // Stores notes data from get request in notes
-      		console.log(this.notes);
       	});
 
     });
 
 
+  }
+
+  launchNoteViewPage(item) {
+    console.log("note view page launch")
+    this.navCtrl.push(NoteViewPage,item);
   }
 
   itemTapped(event, item) {
