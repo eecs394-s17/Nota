@@ -51,28 +51,35 @@ class Notes(Resource):
         """
         notes = []
 
-        with open(self.notes_filepath, "rb") as csvfile:
-                    reader = csv.reader(csvfile)
-                    for row in reader:
-                        # TODO: strip excess spaces
-                        notes.append(row)
+        conn = get_db()
+        c = conn.cursor()
 
-        # TODO: should we get the image using base64?
-        # or should we go straight for hosting
+        for row in c.execute("SELECT * FROM notes"):
 
-        images = []
-        for note in notes:
+            note_path = 0
+            course = 1
+            lecture = 2
+            price = 3
+            name = 4
 
-            if len(note) <= 0:
-                continue
-
-            note_path = note[0] # just cuz its csv
-            with open(note_path, "rb") as f:
+            with open(row[note_path], "rb") as f:
                 data = f.read()
-                image = base64.encodestring(data)
-                images.append(image)
+                notes_data = base64.encodestring(data)
 
-        notes_json = { "notes" : images }
+                current_notes = {
+                                "notes": notes_data,
+                                "course": row[course],
+                                "lecture": row[lecture],
+                                "price": row[price],
+                                "name": row[name]
+                                }
+
+                notes.append(current_notes)
+
+
+        # TODO: setup hosting to return URLs
+
+        notes_json = { "all_notes" : notes }
 
         return notes_json
 
