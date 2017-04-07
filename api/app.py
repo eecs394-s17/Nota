@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
+from flask import g
 from flask import abort
 
 import csv
@@ -13,6 +14,7 @@ import sqlite3
 
 app = Flask(__name__)
 api = Api(app)
+
 
 # database initialization stuff
 DATABASE = './database/database.db'
@@ -38,7 +40,7 @@ class Notes(Resource):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument("name", type=str, required=True)
         self.parser.add_argument("lecture", type=str, required=True)
-        self.parser.add_argument("class", type=str, required=True)
+        self.parser.add_argument("course", type=str, required=True)
         self.parser.add_argument("price", type=str, required=True)
         self.parser.add_argument("notes", type=str, required=True)
 
@@ -80,10 +82,11 @@ class Notes(Resource):
         """
 
         args = self.parser.parse_args()
-        name = args["name"]
+
+        course = args["course"]
         lecture = args["lecture"]
-        course = args["class"] # course because class is keyword
         price = args["price"]
+        name = args["name"]
         notes = args["notes"]
 
         # try to save base64 image
@@ -95,10 +98,19 @@ class Notes(Resource):
         with open(unique_filename, 'wb') as f:
             f.write(image)
 
-        # write file where image was saved to csv
-        with open(self.notes_filepath, 'a') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow([unique_filename])
+        # connect to the database
+        conn = get_db()
+        c = conn.cursor()
+
+        # add the stuff to database
+        print "Adding data to database"
+        c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + lecture + "', '" + price + "', '" + name + "')")
+        conn.commit()
+
+        # # write file where image was saved to csv
+        # with open(self.notes_filepath, 'a') as csvfile:
+        #     writer = csv.writer(csvfile)
+        #     writer.writerow([unique_filename])
 
         return { "path" : unique_filename }
 
