@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { NoteViewPage } from '../pages/note-view/note-view'
 import {UploadingPage} from "../pages/uploading/uploading";
 
+import { SuperTabsModule } from 'ionic2-super-tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -25,7 +26,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    SuperTabsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

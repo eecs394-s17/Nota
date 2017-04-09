@@ -12,7 +12,8 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-
+$tabs-background: green;
+$toolbar-background: yellow;
 
 
 // Named Color Variables
@@ -24,7 +25,7 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #8619c1,
+  primary:    #41325B,
   secondary:  #2946ad,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -48,19 +49,23 @@ $item-ios-detail-push-show: true;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-.md button {
-  text-transform: capitalize;
 
-}
 
-.md button{
-	color: #41325B;
-}
+$background-color: #41325B;
+$list-md-border-color:#6F5499;
 
-.md ion-item h2{
-	color: #4c0493;
-	font-family: ‘Quicksand’, sans-serif;
+
+
+	.md button{
+		background-color: #41325B;
+		color: #008080;
+		font-family: ‘Quicksand’, sans-serif;
+		}
+
+.ios button{
+	color: #008080;
 }
+$button-ios-background-color: red;
 
 
 
