@@ -32,6 +32,10 @@ $colors: (
 );
 
 
+.ios, .md {
+	
+}
+
 
 // App iOS Variables
 // --------------------------------------------------
@@ -44,6 +48,19 @@ $item-ios-detail-push-show: true;
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
+.md button {
+  text-transform: capitalize;
+
+}
+
+.md button{
+	color: #41325B;
+}
+
+.md ion-item h2{
+	color: #4c0493;
+	font-family: ‘Quicksand’, sans-serif;
+}
 
 
 
