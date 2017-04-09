@@ -16,37 +16,31 @@ import { NoteViewPage } from '../note-view/note-view';
 // AKA NotesPage
 export class NotesPage {
 	notes: Array<string> = [];
-  items: Array<{courseName: string, userName: string, date: string, price: string, note: string}>;
+  items: Array<{title: string, course: string, upload_date: string, price: string, note: string, description: string}>;
 	posts: any;
 
   constructor(public navCtrl: NavController, public http: Http, public plt: Platform,) {
     this.items = [];
-    // for (let i = 1; i < 4; i++) {
-    //   this.items.push({
-    //     courseName: "Kyu's EECS-394 Lecture Note # "+ i,
-    //     userName: 'Kyu',
-    //     date: "Apr "+ i +", 2017",
-    //     price: '$'+ i,
-    //     note: 'This is where the notes text goes. This is Leture #' + i
-    //   });
-    // }
+
 
   	this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
-      this.http.get("http://127.0.0.1:5000/api/v1/notes") 
+      this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
       	.subscribe(data => {
       		var res = data.json();
+          console.log(res);
       		// this.items.push( { courseName: res['courseName'],}) etc.
           var all_notes = res["all_notes"];
           console.log(all_notes.length);
           for (let i = 0; i< all_notes.length; i++){
             console.log(all_notes[i]);
             this.items.push({
-              courseName: all_notes[i].course,
-              userName: all_notes[i].name,
-              date: "Apr "+ i +", 2017",
+              title: all_notes[i].title,
+              course: all_notes[i].course,
+              upload_date: all_notes[i].upload_date,
               price: all_notes[i].price,
-              note: all_notes[i].notes
+              note: all_notes[i].notes,
+              description: all_notes[i].description
             });
 
           }

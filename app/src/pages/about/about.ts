@@ -24,7 +24,7 @@ export class AboutPage {
 	public form = this.fb.group({
 		title: ["", Validators.required],
     	course: ["", Validators.required], //validator not working because submit button fires post function on click
-    	lecture: ["", Validators.required],
+    	description: ["", Validators.required],
     	price: ["", Validators.required]
 	});
 	uploadingPage = UploadingPage;
@@ -68,7 +68,7 @@ makePostRequest() {
 				'notes': this.images[0],
 				'name': this.form.value.title,
 				'course': this.form.value.course,
-				'lecture': this.form.value.lecture,
+				'description': this.form.value.description,
 				'price': this.form.value.price
     };
     console.log(this.images[0]);
@@ -77,8 +77,8 @@ makePostRequest() {
 
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+this.images[0]+ "'>";
-    this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
-    // this.http.post("http://sebastianperez.pythonanywhere.com/api/v1/notes", data1)
+    // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
+    this.http.post("http://sebastianperez.pythonanywhere.com/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
