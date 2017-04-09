@@ -13,7 +13,7 @@ except:
     os.mkdir("database")
 
 # try to create the notes table
-table_description = "CREATE TABLE notes (note_path text, course text, lecture text, price text, name text)"
+table_description = "CREATE TABLE notes (note_path text, course text, upload_date text, price text, name text, description text)"
 try:
     c.execute(table_description)
 except:

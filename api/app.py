@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask import g
 from flask import abort
 
-import csv
+import datetime
 
 import uuid
 
@@ -37,11 +37,11 @@ class Notes(Resource):
     def __init__(self):
 
         self.parser = reqparse.RequestParser()
-        self.parser.add_argument("name", type=str, required=True)
-        self.parser.add_argument("lecture", type=str, required=True)
+        self.parser.add_argument("title", type=str, required=True)
         self.parser.add_argument("course", type=str, required=True)
         self.parser.add_argument("price", type=str, required=True)
         self.parser.add_argument("notes", type=str, required=True)
+        self.parser.add_argument("description", type=str, required=False)
 
     def get(self):
         """
@@ -57,9 +57,10 @@ class Notes(Resource):
 
             note_path = 0
             course = 1
-            lecture = 2
+            upload_date = 2
             price = 3
-            name = 4
+            title = 4
+            description = 5
 
             with open(row[note_path], "rb") as f:
 
@@ -69,9 +70,10 @@ class Notes(Resource):
                 current_notes = {
                                 "notes": notes_data,
                                 "course": row[course],
-                                "lecture": row[lecture],
+                                "upload_date": row[upload_date],
                                 "price": row[price],
-                                "name": row[name]
+                                "title": row[title],
+                                "description": row[description]
                                 }
 
                 notes.append(current_notes)
@@ -91,10 +93,14 @@ class Notes(Resource):
         args = self.parser.parse_args()
 
         course = args["course"]
-        lecture = args["lecture"]
+        upload_date = str(datetime.datetime.now())
         price = args["price"]
-        name = args["name"]
+        title = args["title"]
         notes = args["notes"]
+        description = args["description"]
+
+        if description == None:
+            description = ""
 
         # try to save base64 image
         image = base64.decodestring(notes)
@@ -111,7 +117,7 @@ class Notes(Resource):
 
         # add the stuff to database
         print "Adding data to database"
-        c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + lecture + "', '" + price + "', '" + name + "')")
+        c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + upload_date + "', '" + price + "', '" + title + "', '" + description +  "')")
         conn.commit()
 
         # # write file where image was saved to csv

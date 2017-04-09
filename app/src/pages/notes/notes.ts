@@ -6,7 +6,6 @@ import { AlertController } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 
-import { dataSrvc } from './data.service';
 
 import 'rxjs/add/operator/map'
 import { NoteViewPage } from '../note-view/note-view';
@@ -52,10 +51,6 @@ export class NotesPage {
 
           }
 
-        //   this.items[0].note = res["notes"];
-      		// this.notes.push(res["notes"]); // Stores notes data from get request in notes
-
- 
 
 
 
