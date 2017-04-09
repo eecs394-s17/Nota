@@ -12,8 +12,7 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$tabs-background: green;
-$toolbar-background: yellow;
+
 
 
 // Named Color Variables
@@ -32,10 +31,8 @@ $colors: (
   dark:       #222
 );
 
-
-.ios, .md {
-	
-}
+$tabs-background: green;
+$toolbar-background: color($colors, primary);
 
 
 // App iOS Variables
@@ -51,7 +48,7 @@ $item-ios-detail-push-show: true;
 
 
 
-$background-color: #41325B;
+// $background-color: #41325B;
 $list-md-border-color:#6F5499;
 
 
