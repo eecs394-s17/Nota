@@ -16,6 +16,10 @@ $ pip install -r requirements.txt
 * the permissions are pretty lenient at this point...(shhh don't tell). Just create some aws credentials and configurue them according to this
 
 ## Run
+* get some setup stuff out of the way by running the start file
+```
+$ python start.py
+```
 * start up the environment
 ```
 $ source api/bin/activate
