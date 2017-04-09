@@ -25,11 +25,46 @@ export class NotesPage {
 
   	this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
-      this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
-      	.subscribe(data => {
-      		var res = data.json();
+      // this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
+      // 	.subscribe(data => {
+      // 		var res = data.json();
+      //     console.log(res);
+      // 		// this.items.push( { courseName: res['courseName'],}) etc.
+      //     var all_notes = res["all_notes"];
+      //     console.log(all_notes.length);
+      //     for (let i = 0; i< all_notes.length; i++){
+      //       console.log(all_notes[i]);
+      //       this.items.push({
+      //         title: all_notes[i].title,
+      //         course: all_notes[i].course,
+      //         upload_date: all_notes[i].upload_date,
+      //         price: all_notes[i].price,
+      //         note: all_notes[i].notes,
+      //         description: all_notes[i].description
+      //       });
+
+      //     }
+
+
+
+
+      // 	});
+
+    });
+
+
+
+  }
+
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter b');
+    this.items = [];
+   this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
+        .subscribe(data => {
+          var res = data.json();
           console.log(res);
-      		// this.items.push( { courseName: res['courseName'],}) etc.
+          // this.items.push( { courseName: res['courseName'],}) etc.
           var all_notes = res["all_notes"];
           console.log(all_notes.length);
           for (let i = 0; i< all_notes.length; i++){
@@ -48,12 +83,7 @@ export class NotesPage {
 
 
 
-      	});
-
-    });
-
-
-
+        });
   }
 
   launchNoteViewPage(item) {
