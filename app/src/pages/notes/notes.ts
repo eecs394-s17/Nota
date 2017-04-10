@@ -60,7 +60,7 @@ export class NotesPage {
   ionViewDidEnter() {
     console.log('ionViewDidEnter b');
     this.items = [];
-   this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
+   this.http.get("http://34.209.98.85/api/v1/notes") 
         .subscribe(data => {
           var res = data.json();
           console.log(res);
