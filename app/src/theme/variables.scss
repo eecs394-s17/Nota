@@ -25,21 +25,35 @@ $font-path: "../assets/fonts";
 
 $colors: (
   primary:    #41325B,
-  secondary:  #2946ad,
+  secondary:  #008080,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
 
-$tabs-background: green;
+$tabs-background: color($colors, primary);
 $toolbar-background: color($colors, primary);
+
+
+.toolbar-title-ios {
+  font-family: 'Bitter', serif;
+}
+
+.toolbar-title-md {
+  font-family: 'Bitter', serif;
+}
+
+.toolbar-title-wp {
+  font-family: 'Bitter', serif;
+}
+// font-family: 'Bitter', serif;
 
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-$item-ios-detail-push-show: true;
+// $item-ios-detail-push-show: true;
 
 
 // App Material Design Variables
@@ -54,7 +68,7 @@ $list-md-border-color:#6F5499;
 
 
 	.md button{
-		background-color: #41325B;
+		// background-color: #41325B;
 		color: #008080;
 		font-family: ‘Quicksand’, sans-serif;
 		}
@@ -62,8 +76,10 @@ $list-md-border-color:#6F5499;
 .ios button{
 	color: #008080;
 }
-$button-ios-background-color: red;
 
+.md button {
+	color: #008080;
+}
 
 
 // App Windows Variables
