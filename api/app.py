@@ -116,7 +116,6 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        print "Adding data to database"
         c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + upload_date + "', '" + price + "', '" + title + "', '" + description +  "')")
         conn.commit()
 
@@ -126,6 +125,20 @@ class Notes(Resource):
         #     writer.writerow([unique_filename])
 
         return { "path" : unique_filename }
+
+    def delete(self):
+        """
+        delete endpoint that deletes all notes or a specific set of notes
+        """
+
+        # connect to the database
+        conn = get_db()
+        c = conn.cursor()
+
+        c.execute("DELETE FROM notes")
+        conn.commit()
+
+
 
 
 api.add_resource(Notes, "/api/v1/notes")
