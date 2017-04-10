@@ -78,7 +78,7 @@ makePostRequest() {
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
-    this.http.post("http://sebastianperez.pythonanywhere.com/api/v1/notes", data1)
+    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
