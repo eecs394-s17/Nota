@@ -1,11 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Camera, ImagePicker} from 'ionic-native';
+import {Camera} from 'ionic-native';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'underscore';
 
 @Injectable()
 export class Plugins {
     
-    constructor() { }     
+    constructor(private _domSanitizer: DomSanitizer) { }     
     
     // albums = {            
     //     open () : Promise<any>  { 
