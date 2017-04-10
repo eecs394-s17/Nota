@@ -31,7 +31,7 @@ $colors: (
   dark:       #222
 );
 
-$tabs-background: color($colors, primary);
+// $tabs-background: color($colors, primary);
 $toolbar-background: color($colors, primary);
 
 
@@ -63,23 +63,12 @@ $toolbar-background: color($colors, primary);
 
 
 // $background-color: #41325B;
+
 $list-md-border-color:#6F5499;
+$list-ios-border-color:#6F5499;
 
 
 
-	.md button{
-		// background-color: #41325B;
-		color: #008080;
-		font-family: ‘Quicksand’, sans-serif;
-		}
-
-.ios button{
-	color: #008080;
-}
-
-.md button {
-	color: #008080;
-}
 
 
 // App Windows Variables
