@@ -11,6 +11,10 @@ import {UploadingPage} from "../pages/uploading/uploading";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
+import { AuthService } from '../providers/auth-service';
+
 
 
 @NgModule({
@@ -21,7 +25,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotesPage,
     TabsPage,
     UploadingPage,
-    NoteViewPage
+    NoteViewPage,
+    LoginPage,
+    RegisterPage
 
   ],
   imports: [
@@ -35,12 +41,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotesPage,
     TabsPage,
     UploadingPage,
-    NoteViewPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Plugins,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
