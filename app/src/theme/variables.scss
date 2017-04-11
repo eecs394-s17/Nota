@@ -13,8 +13,6 @@ $font-path: "../assets/fonts";
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
 
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -22,6 +20,9 @@ $font-path: "../assets/fonts";
 // to match your app's branding. Ionic uses a Sass map of
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
+
+$tabs-background: #21ffad;
+$toolbar-background: #21ffad;
 
 $colors: (
   primary:    #41325B,
@@ -32,20 +33,20 @@ $colors: (
 );
 
 // $tabs-background: color($colors, primary);
-$toolbar-background: color($colors, primary);
+//$toolbar-background: color($colors, primary);
 
 
-.toolbar-title-ios {
-  font-family: 'Bitter', serif;
-}
+//.toolbar-title-ios {
+  //font-family: 'Bitter', serif;
+//}
 
-.toolbar-title-md {
-  font-family: 'Bitter', serif;
-}
+//.toolbar-title-md {
+  //font-family: 'Bitter', serif;
+//}
 
-.toolbar-title-wp {
-  font-family: 'Bitter', serif;
-}
+//.toolbar-title-wp {
+  //font-family: 'Bitter', serif;
+//}
 // font-family: 'Bitter', serif;
 
 
@@ -53,7 +54,7 @@ $toolbar-background: color($colors, primary);
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-// $item-ios-detail-push-show: true;
+$item-ios-detail-push-show: true;
 
 
 // App Material Design Variables
@@ -64,10 +65,16 @@ $toolbar-background: color($colors, primary);
 
 // $background-color: #41325B;
 
-$list-md-border-color:#6F5499;
-$list-ios-border-color:#6F5499;
+//$list-md-border-color:#6F5499;
+$list-ios-border-color:#eaeaea;
 
+.md button{
+  background-color: black;
+}
 
+.ios button{
+  color: #eaeaea;
+}
 
 
 
