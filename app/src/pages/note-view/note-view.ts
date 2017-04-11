@@ -5,7 +5,6 @@ import { Http } from '@angular/http';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { dataSrvc } from './data.service';
 
 import 'rxjs/add/operator/map'
 
@@ -25,10 +24,10 @@ export class NoteViewPage {
   course:string = "";
   upload_date:string = "";
   price:string = "";
-  note:string = "";
+  note:any;
   description:string = "";
 
-  constructor(public _domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
+  constructor(private _domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
 //       console.log('Platform ready from', readySource);
 //       this.http.get("http://127.0.0.1:5000/api/v1/notes")
@@ -39,7 +38,8 @@ export class NoteViewPage {
 //           //this.notes.push(res["notes"]); // Stores notes data from get request in notes
 //           console.log('yay notes in note-view')
 //   })
-  
+    
+
 // })
   };
 // imgBase64(){
@@ -53,11 +53,15 @@ export class NoteViewPage {
     this.upload_date = this.navParams.get('upload_date');
     this.description = this.navParams.get('description');
     this.price = this.navParams.get('price');
-    this.note = this.navParams.get('note');
+    this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
+    // this.note = this.navParams.get('note');
     console.log("note is...: ");
     console.log(this.note);
   }
 
+  public get image() {
+    return this.note;
+  }
 
 
 }
