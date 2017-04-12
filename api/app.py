@@ -67,6 +67,12 @@ def protected():
 # database initialization stuff
 DATABASE = './database/database.db'
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -99,29 +105,33 @@ class Notes(Resource):
         notes = []
 
         conn = get_db()
+        conn.row_factory = dict_factory
         c = conn.cursor()
+        c.execute("SELECT * FROM notes")
+        print c.fetchone()["title"]
 
         for row in c.execute("SELECT * FROM notes"):
 
-            note_path = 0
-            course = 1
-            upload_date = 2
-            price = 3
-            title = 4
-            description = 5
+            # note_path = 0
+            # course = 1
+            # upload_date = 2
+            # price = 3
+            # title = 4
+            # description = 5
+            # userID = 6
 
-            with open(row[note_path], "rb") as f:
+            with open(row["filename"], "rb") as f:
 
                 data = f.read()
                 notes_data = base64.encodestring(data)
 
                 current_notes = {
                                 "notes": notes_data,
-                                "course": row[course],
-                                "upload_date": row[upload_date],
-                                "price": row[price],
-                                "title": row[title],
-                                "description": row[description]
+                                "course": row["course"],
+                                "upload_date": row["upload_date"],
+                                "price": row["price"],
+                                "title": row["title"],
+                                "description": row["description"]
                                 }
 
                 notes.append(current_notes)
