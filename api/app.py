@@ -25,6 +25,7 @@ class User(UserMixin):
     user_database = {"JohnDoe": ("JohnDoe", "John"),
                "JaneDoe": ("JaneDoe", "Jane")}
 
+
     def __init__(self, username, password):
         self.id = username
         self.password = password
@@ -145,6 +146,8 @@ class Notes(Resource):
         title = args["title"]
         notes = args["notes"]
         description = args["description"]
+        userID = 5
+
 
         if description == None:
             description = ""
@@ -163,15 +166,18 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + upload_date + "', '" + price + "', '" + title + "', '" + description +  "')")
+        # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
+        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
         conn.commit()
+
+        print(c.lastrowid)
 
         # # write file where image was saved to csv
         # with open(self.notes_filepath, 'a') as csvfile:
         #     writer = csv.writer(csvfile)
         #     writer.writerow([unique_filename])
 
-        return { "path" : unique_filename }
+        return { "path" : unique_filename, "userID": userID }
 
     def delete(self):
         """
