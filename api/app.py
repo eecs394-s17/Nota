@@ -107,8 +107,6 @@ class Notes(Resource):
         conn = get_db()
         conn.row_factory = dict_factory
         c = conn.cursor()
-        c.execute("SELECT * FROM notes")
-        print c.fetchone()["title"]
 
         for row in c.execute("SELECT * FROM notes"):
 
