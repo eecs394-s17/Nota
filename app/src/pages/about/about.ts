@@ -74,10 +74,9 @@ makePostRequest() {
     console.log(this.images[0]);
 
     console.log(data1);
-    this.navCtrl.push(UploadingPage); 
+    
 
-    var base64image = document.getElementById("upload_img");
-    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
+    
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
 
     this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
@@ -91,6 +90,12 @@ makePostRequest() {
     }, error => {
         console.log(JSON.stringify(error.json()));
     });
+
+    this.navCtrl.push(UploadingPage); 
+    // This may not be the best way to load it, try passing it  via navCtrl
+    var base64image = document.getElementById("upload_img");
+    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
+
 }} 
 
 
