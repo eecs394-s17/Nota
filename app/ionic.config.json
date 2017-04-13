@@ -2,5 +2,9 @@
   "name": "Nota",
   "app_id": "7a669310",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [{
+  	"path": "/",
+  	"proxyUrl": "http://34.209.98.85:5000/api/v1/notes"
+  }]
 }

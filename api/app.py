@@ -132,6 +132,7 @@ class Notes(Resource):
                                 "price": row["price"],
                                 "title": row["title"],
                                 "description": row["description"]
+                                "userID": row["userID"]
                                 }
 
                 notes.append(current_notes)
@@ -157,6 +158,7 @@ class Notes(Resource):
         notes = args["notes"]
         description = args["description"]
         userID = 5
+        username = "dajunjin"
 
 
         if description == None:

@@ -30,7 +30,7 @@
 
 
 <ion-list>
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="makePostRequest()">
     <ion-item>
       <ion-label floating>Title</ion-label>
       <ion-input formControlName="title" type="text"></ion-input>
@@ -55,7 +55,7 @@
       <ion-input formControlName="description" type="text"></ion-input>
     </ion-item>
 
-      <button [navPush]="uploadingPage" type="submit" ion-button block color="secondary" (click)="makePostRequest()">Upload</button>
+      <button type="submit" color="secondary" ion-button block [disabled]="!form.valid" >Upload</button>
     </form>
 </ion-list>
 

@@ -61,6 +61,7 @@ export class NotesPage {
     console.log('ionViewDidEnter b');
     this.items = [];
 
+    // this.http.get("/api")
    this.http.get("http://34.209.98.85:5000/api/v1/notes") 
         .subscribe(data => {
           var res = data.json();

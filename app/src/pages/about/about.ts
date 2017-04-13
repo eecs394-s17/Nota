@@ -74,6 +74,7 @@ makePostRequest() {
     console.log(this.images[0]);
 
     console.log(data1);
+    this.navCtrl.push(UploadingPage);
 
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
