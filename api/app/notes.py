@@ -4,6 +4,12 @@ from flask_restful import Resource, Api, reqparse
 from utils import get_db
 from utils import dict_factory
 
+import datetime
+
+import uuid
+
+import base64
+
 class Notes(Resource):
 
     def __init__(self):
@@ -27,14 +33,6 @@ class Notes(Resource):
         c = conn.cursor()
 
         for row in c.execute("SELECT * FROM notes"):
-
-            # note_path = 0
-            # course = 1
-            # upload_date = 2
-            # price = 3
-            # title = 4
-            # description = 5
-            # userID = 6
 
             with open(row["filename"], "rb") as f:
 
@@ -97,13 +95,6 @@ class Notes(Resource):
         # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
         c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
         conn.commit()
-
-        print(c.lastrowid)
-
-        # # write file where image was saved to csv
-        # with open(self.notes_filepath, 'a') as csvfile:
-        #     writer = csv.writer(csvfile)
-        #     writer.writerow([unique_filename])
 
         return { "path" : unique_filename, "userID": userID }
 
