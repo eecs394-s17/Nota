@@ -1,7 +1,7 @@
 from flask import Flask, Response
 from flask_restful import Resource, Api, reqparse
 from flask import abort
-from app import notes
+from api import notes
 
 from flask import g
 
@@ -76,5 +76,6 @@ api.add_resource(notes.Notes, "/api/v1/notes")
 
 
 if __name__ == '__main__':
+
     app.config["SECRET_KEY"] = "ITSASECRET"
     app.run(host='0.0.0.0', debug=False)
