@@ -182,8 +182,7 @@ class Notes(Resource):
             c.execute("DELETE FROM notes WHERE id ='" + notes_id + "'")
             conn.commit()
 
-            return { "id" : notes_id }
-
+            return 
 
         c.execute("DELETE FROM notes")
         conn.commit()

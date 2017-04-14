@@ -105,7 +105,7 @@ class Users(Resource):
             c.execute("DELETE FROM users WHERE id ='" + user_id + "'")
             conn.commit()
 
-            return { "id" : user_id }
+            return
 
         c.execute("DELETE FROM users")
         conn.commit()
