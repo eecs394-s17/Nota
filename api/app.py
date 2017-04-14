@@ -28,6 +28,8 @@ class User(UserMixin):
     user_database = {"JohnDoe": ("JohnDoe", "John"),
                "JaneDoe": ("JaneDoe", "Jane")}
 
+    # c.execute("INSERT INTO users VALUES ")
+
 
     def __init__(self, username, password):
         self.id = username
@@ -77,4 +79,4 @@ api.add_resource(notes.Notes, "/api/v1/notes")
 
 if __name__ == '__main__':
     app.config["SECRET_KEY"] = "ITSASECRET"
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=False)
