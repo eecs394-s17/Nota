@@ -10,6 +10,7 @@ import uuid
 
 import base64
 
+
 class Notes(Resource):
 
     def __init__(self):
@@ -20,11 +21,14 @@ class Notes(Resource):
         self.parser.add_argument("price", type=str, required=True)
         self.parser.add_argument("notes", type=str, required=True)
         self.parser.add_argument("description", type=str, required=False)
+        self.parser.add_argument("id")
 
     def get(self):
         """
-        serves the get endpoint
-        when hit it will return all the notes
+        there are two ways to access this endpoint via a get request:
+        1) /api/v1/notes -> this will return the metadata for all notes
+        2) /api/v1/notes/{id} -> this will return the metadata as well as the notes themselves
+        TODO: eventually we will wanna abstract this out so that metadata is a different endpoint
         """
         notes = []
 
@@ -51,16 +55,15 @@ class Notes(Resource):
 
                 notes.append(current_notes)
 
-
-        # TODO: setup hosting to return URLs
-
         notes_json = { "all_notes" : notes }
 
         return notes_json
 
     def post(self):
         """
-        a post endpoint that adds notes
+        there is one way to access this endpoint via a post request
+        with the data in the body of the request
+        1) /api/v1/notes -> creates a new set of notes
         """
 
         args = self.parser.parse_args()
@@ -96,11 +99,13 @@ class Notes(Resource):
         c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
         conn.commit()
 
-        return { "path" : unique_filename, "userID": userID }
+        return { "id" : unique_filename, "user_id": userID }
 
     def delete(self):
         """
-        delete endpoint that deletes all notes or a specific set of notes
+        there two ways to access this endpoint via a delete request
+        1) /api/v1/notes -> this will delete all notes (yikes)
+        2) /api/v1/notes/{id} -> this will delete the notes associated with the id
         """
 
         # connect to the database
