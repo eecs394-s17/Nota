@@ -38,8 +38,6 @@ class Notes(Resource):
         TODO: eventually we will wanna abstract this out so that metadata is a different endpoint
         """
 
-        notes = []
-
         conn = get_db()
         conn.row_factory = dict_factory
         c = conn.cursor()
@@ -75,6 +73,8 @@ class Notes(Resource):
                               }
 
                 return notes_dict
+
+        notes = []
 
         # otherwise we are gonna return all the notes
         for row in c.execute("SELECT * FROM notes"):
