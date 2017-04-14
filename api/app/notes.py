@@ -1,5 +1,6 @@
 from flask import Flask, Response
 from flask_restful import Resource, Api, reqparse
+from flask import abort
 
 from utils import get_db
 from utils import dict_factory
@@ -36,43 +37,35 @@ class Notes(Resource):
 
         # if we have indeed found and id let's get the corresponding notes assuming they exist
         notes_id = args["id"]
-        # if notes_id != None:
-        #
-        #     notes_iterator = c.execute("SELECT * FROM notes WHERE id='" + notes_id + "' LIMIT 1")
-        #
-        #     with open(row["filename"], "rb") as f:
-        #
-        #         data = f.read()
-        #         notes_data = base64.encodestring(data)
-        #
-        #         current_notes = {
-        #                         "id": row["id"],
-        #                         "course": row["course"],
-        #                         "upload_date": row["upload_date"],
-        #                         "price": row["price"],
-        #                         "title": row["title"],
-        #                         "description": row["description"],
-        #                         "user_id": row["userID"],
-        #                         "notes": notes_data
-        #                         }
+        if notes_id != None:
+
+
+            c.execute("SELECT * FROM notes WHERE id='" + notes_id + "'")
+            requested_notes = c.fetchone()
+            if requested_notes == None:
+                print "Those notes don't exist :O"
+                abort(400)
+
+            with open(requested_notes["filename"], "rb") as f:
+
+                data = f.read()
+                notes_data = base64.encodestring(data)
+
+                notes_dict = {
+                                "id": requested_notes["id"],
+                                "course": requested_notes["course"],
+                                "upload_date": requested_notes["upload_date"],
+                                "price": requested_notes["price"],
+                                "title": requested_notes["title"],
+                                "description": requested_notes["description"],
+                                "user_id": requested_notes["userID"],
+                                "notes": notes_data
+                              }
+
+                return notes_dict
 
         # otherwise we are gonna return all the notes
         for row in c.execute("SELECT * FROM notes"):
-
-            # with open(row["filename"], "rb") as f:
-            #
-            #     data = f.read()
-            #     notes_data = base64.encodestring(data)
-            #
-            #     current_notes = {
-            #                     "notes": notes_data,
-            #                     "course": row["course"],
-            #                     "upload_date": row["upload_date"],
-            #                     "price": row["price"],
-            #                     "title": row["title"],
-            #                     "description": row["description"],
-            #                     "user_id": row["userID"]
-            #                     }
 
             current_notes = {
                             "id": row["id"],
