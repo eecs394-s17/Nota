@@ -87,7 +87,8 @@ class Users(Resource):
     def delete(self):
         """
         there is one way to access this endpoint via a delete request
-        1) /api/v1/users/{id} -> this will delete the user associated with the id
+        1) /api/v1/users -> this will delete all users
+        2) /api/v1/users/{id} -> this will delete the user associated with the id
         """
 
         conn = get_db()
