@@ -34,8 +34,8 @@ $ python app.py
 
 * GET
     * **/api/v1/notes**: returns a list with the data for all notes on the database (but not the notes these can be retrieved by making a get request with the id specified)
-    * **/api/v1/notes/{id}**: returns the data for the notes associated with the id specified including the notes themselves
-    * **/api/v1/notes/{user_id}**: returns a list with the data for all notes on the database for the specified user
+    * **/api/v1/notes?id={id}**: returns the data for the notes associated with the id specified including the notes themselves
+    * **/api/v1/notes?user_id={user_id}**: returns a list with the data for all notes on the database for the specified user
 
 * POST
     * **/api/v1/notes**: saves a new set of notes and returns the id of the notes created
@@ -44,6 +44,6 @@ $ python app.py
 
 * DELETE
     * **/api/v1/notes**: deletes all notes on and returns nothing
-    * **/api/v1/notes/{id}**: deletes the notes of the specified id and returns nothing
+    * **/api/v1/notes?id={id}**: deletes the notes of the specified id and returns nothing
 
 * **write similar docs for users endpoint**
