@@ -25,7 +25,6 @@ class User(UserMixin):
     user_database = {"JohnDoe": ("JohnDoe", "John"),
                "JaneDoe": ("JaneDoe", "Jane")}
 
-
     def __init__(self, username, password):
         self.id = username
         self.password = password
@@ -67,12 +66,6 @@ def protected():
 # database initialization stuff
 DATABASE = './database/database.db'
 
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0]] = row[idx]
-    return d
-
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -105,32 +98,29 @@ class Notes(Resource):
         notes = []
 
         conn = get_db()
-        conn.row_factory = dict_factory
         c = conn.cursor()
 
         for row in c.execute("SELECT * FROM notes"):
 
-            # note_path = 0
-            # course = 1
-            # upload_date = 2
-            # price = 3
-            # title = 4
-            # description = 5
-            # userID = 6
+            note_path = 0
+            course = 1
+            upload_date = 2
+            price = 3
+            title = 4
+            description = 5
 
-            with open(row["filename"], "rb") as f:
+            with open(row[note_path], "rb") as f:
 
                 data = f.read()
                 notes_data = base64.encodestring(data)
 
                 current_notes = {
                                 "notes": notes_data,
-                                "course": row["course"],
-                                "upload_date": row["upload_date"],
-                                "price": row["price"],
-                                "title": row["title"],
-                                "description": row["description"]
-                                "userID": row["userID"]
+                                "course": row[course],
+                                "upload_date": row[upload_date],
+                                "price": row[price],
+                                "title": row[title],
+                                "description": row[description]
                                 }
 
                 notes.append(current_notes)
@@ -155,9 +145,6 @@ class Notes(Resource):
         title = args["title"]
         notes = args["notes"]
         description = args["description"]
-        userID = 5
-        username = "dajunjin"
-
 
         if description == None:
             description = ""
@@ -176,18 +163,100 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
-        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
+        c.execute("INSERT INTO notes VALUES ( '" + unique_filename + "', '" + course + "', '" + upload_date + "', '" + price + "', '" + title + "', '" + description +  "')")
         conn.commit()
-
-        print(c.lastrowid)
 
         # # write file where image was saved to csv
         # with open(self.notes_filepath, 'a') as csvfile:
         #     writer = csv.writer(csvfile)
         #     writer.writerow([unique_filename])
 
-        return { "path" : unique_filename, "userID": userID }
+        return { "path" : unique_filename }
+
+    def delete(self):
+        """
+        delete endpoint that deletes all notes or a specific set of notes
+        """
+
+        # connect to the database
+        conn = get_db()
+        c = conn.cursor()
+
+        c.execute("DELETE FROM notes")
+        conn.commit()
+
+class Users(Resource):
+
+    def __init__(self):
+
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument("firstName", type=str, required=True)
+        self.parser.add_argument("lastName", type=str, required=True)
+        self.parser.add_argument("email", type=str, required=True)
+        self.parser.add_argument("password", type=str, required=True)
+
+    def get(self):
+        """
+        serves the get endpoint
+        when hit it will return all the notes
+        """
+        users = []
+
+        conn = get_db()
+        c = conn.cursor()
+
+        for row in c.execute("SELECT * FROM users"):
+
+            user_path = 0
+            firstName = 1
+            lastName = 2
+            email = 3
+            password = 4
+
+            with open(row[user_path], "rb") as f:
+
+                current_user = {
+                                "firstName": row[firstName],
+                                "lastName": row[lastName],
+                                "email": row[email],
+                                "password": row[password],
+                                }
+
+                users.append(current_user)
+
+
+        # TODO: setup hosting to return URLs
+
+        users_json = { "all_users" : users }
+
+        return users_json
+
+    def post(self):
+        """
+        a post endpoint that adds notes
+        """
+
+        args = self.parser.parse_args()
+
+        firstName = args["firstName"]
+        lastName = args["lastName"]
+        email = args["email"]
+        password = args["password"]
+
+        # connect to the database
+        conn = get_db()
+        c = conn.cursor()
+
+        # add the stuff to database
+        c.execute("INSERT INTO users VALUES ( '" + firstName + "', '" + lastName + "', '" + email + "', '" + password + "')")
+        conn.commit()
+
+        # # write file where image was saved to csv
+        # with open(self.notes_filepath, 'a') as csvfile:
+        #     writer = csv.writer(csvfile)
+        #     writer.writerow([unique_filename])
+
+        return { "email" : email }
 
     def delete(self):
         """
@@ -202,10 +271,9 @@ class Notes(Resource):
         conn.commit()
 
 
-
-
 api.add_resource(Notes, "/api/v1/notes")
 
+api.add_resource(Users, "/api/v1/users")
 
 if __name__ == '__main__':
     app.config["SECRET_KEY"] = "ITSASECRET"
