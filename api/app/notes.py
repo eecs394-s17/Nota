@@ -5,6 +5,8 @@ from flask import abort
 from utils import get_db
 from utils import dict_factory
 
+import os
+
 import datetime
 
 import uuid
@@ -38,7 +40,6 @@ class Notes(Resource):
         # if we have indeed found and id let's get the corresponding notes assuming they exist
         notes_id = args["id"]
         if notes_id != None:
-
 
             c.execute("SELECT * FROM notes WHERE id='" + notes_id + "'")
             requested_notes = c.fetchone()
@@ -140,9 +141,33 @@ class Notes(Resource):
         2) /api/v1/notes/{id} -> this will delete the notes associated with the id
         """
 
-        # connect to the database
         conn = get_db()
+        conn.row_factory = dict_factory
         c = conn.cursor()
+
+        parser = reqparse.RequestParser()
+        parser.add_argument("id", type=str, required=False, location="args")
+        args = parser.parse_args()
+
+        # if we have indeed found and id let's get the corresponding notes assuming they exist
+        notes_id = args["id"]
+        if notes_id != None:
+
+            c.execute("SELECT * FROM notes WHERE id='" + notes_id + "'")
+            requested_notes = c.fetchone()
+            if requested_notes == None:
+                print "Those notes don't exist :O"
+                abort(400)
+
+            os.remove(requested_notes["filename"])
+
+            c.execute("DELETE FROM notes WHERE id ='" + notes_id + "'")
+            conn.commit()
+
+            return { "deleted" : notes_id }
+
 
         c.execute("DELETE FROM notes")
         conn.commit()
+
+        return { "deleted" : "all notes deleted" }
