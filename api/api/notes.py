@@ -44,6 +44,7 @@ class Notes(Resource):
 
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=str, required=False, location="args")
+        parser.add_argument("user_id", type=str, required=False, location="args")
         args = parser.parse_args()
 
         # if we have indeed found and id let's get the corresponding notes assuming they exist
@@ -68,7 +69,7 @@ class Notes(Resource):
                                 "price": requested_notes["price"],
                                 "title": requested_notes["title"],
                                 "description": requested_notes["description"],
-                                "user_id": requested_notes["userID"],
+                                "user_id": requested_notes["user_id"],
                                 "notes": notes_data
                               }
 
@@ -76,8 +77,14 @@ class Notes(Resource):
 
         notes = []
 
+        user_id = args["user_id"]
+        select_notes = "SELECT * FROM notes"
+        if user_id != None:
+            select_notes += (" WHERE user_id = '" + user_id + "'")
+
+        print select_notes
         # otherwise we are gonna return all the notes
-        for row in c.execute("SELECT * FROM notes"):
+        for row in c.execute(select_notes):
 
             current_notes = {
                             "id": row["id"],
@@ -86,7 +93,7 @@ class Notes(Resource):
                             "price": row["price"],
                             "title": row["title"],
                             "description": row["description"],
-                            "user_id": row["userID"]
+                            "user_id": row["user_id"]
                             }
 
             notes.append(current_notes)
@@ -107,6 +114,7 @@ class Notes(Resource):
         parser.add_argument("course", type=str, required=True)
         parser.add_argument("price", type=str, required=True)
         parser.add_argument("notes", type=str, required=True)
+        parser.add_argument("user_id", type=str, required=True)
         parser.add_argument("description", type=str, required=False)
         args = parser.parse_args()
 
@@ -115,9 +123,8 @@ class Notes(Resource):
         price = args["price"]
         title = args["title"]
         notes = args["notes"]
+        user_id = args["user_id"]
         description = args["description"]
-        userID = 5
-        username = "test_user"
 
 
         if description == None:
@@ -138,8 +145,7 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
-        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
+        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id))
         conn.commit()
 
         last_row_id = c.lastrowid
