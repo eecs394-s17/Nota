@@ -5,6 +5,8 @@ from api import notes
 
 from flask import g
 
+import os
+
 import datetime
 
 import uuid
@@ -81,6 +83,6 @@ if __name__ == '__main__':
 
     debug = os.environ.get('DEBUG')
     if debug:
-        app.run(debug=True, debug=False)
+        app.run(debug=True)
     else:
-        app.run(host="0.0.0.0")
+        app.run(host="0.0.0.0", debug=False)
