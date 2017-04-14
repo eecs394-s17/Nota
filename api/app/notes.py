@@ -19,6 +19,7 @@ class Notes(Resource):
     def __init__(self):
         pass
 
+    # TODO: pull out the stuff common to the get and delete methods
     def get(self):
         """
         there are two ways to access this endpoint via a get request:
