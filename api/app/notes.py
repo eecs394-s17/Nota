@@ -85,8 +85,7 @@ class Notes(Resource):
         image = base64.decodestring(notes)
 
         # save base64 to somewhere on machine
-        # TODO: handle different filetypes
-        unique_filename = str(uuid.uuid4())
+        unique_filename = "/srv/images/" + str(uuid.uuid4())
         with open(unique_filename, 'wb') as f:
             f.write(image)
 
