@@ -3,9 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask import abort
 from app import notes
 
-
 from flask import g
-
 
 import datetime
 
@@ -28,6 +26,12 @@ class User(UserMixin):
     user_database = {"JohnDoe": ("JohnDoe", "John"),
                "JaneDoe": ("JaneDoe", "Jane")}
 
+<<<<<<< HEAD
+=======
+    # c.execute("INSERT INTO users VALUES ")
+
+
+>>>>>>> a9e10abad06d4afac0105b70d7ca1b601793f32c
     def __init__(self, username, password):
         self.id = username
         self.password = password
@@ -285,4 +289,4 @@ api.add_resource(Users, "/api/v1/users")
 
 if __name__ == '__main__':
     app.config["SECRET_KEY"] = "ITSASECRET"
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=False)
