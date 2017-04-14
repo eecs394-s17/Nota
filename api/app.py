@@ -1,7 +1,10 @@
 from flask import Flask, Response
 from flask_restful import Resource, Api, reqparse
-from flask import g
 from flask import abort
+from app import notes
+
+
+from flask import g
 
 
 import datetime
@@ -72,11 +75,13 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
+
 
 
 class Notes(Resource):
@@ -273,9 +278,11 @@ class Users(Resource):
 
 api.add_resource(Notes, "/api/v1/notes")
 
+# what is this?  notes.Notes
+api.add_resource(notes.Notes, "/api/v1/notes")
+
 api.add_resource(Users, "/api/v1/users")
 
 if __name__ == '__main__':
     app.config["SECRET_KEY"] = "ITSASECRET"
-    # app.run(port=5000,debug=True)
     app.run(debug=True)
