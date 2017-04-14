@@ -52,9 +52,9 @@ class Users(Resource):
                             "password": row["password"]
                             }
 
-            users.append(current_users)
+            users.append(current_user)
 
-        users_json = { "all_users" : users }
+        users_json = { "users" : users }
 
         return users_json
 
@@ -94,4 +94,17 @@ class Users(Resource):
         conn.row_factory = dict_factory
         c = conn.cursor()
 
-        return { "id" : "test"}
+        parser = reqparse.RequestParser()
+        parser.add_argument("id", type=str, required=False)
+        args = parser.parse_args()
+
+        user_id = args["id"]
+        if user_id != None:
+
+            c.execute("DELETE FROM users WHERE id ='" + user_id + "'")
+            conn.commit()
+
+            return { "id" : user_id }
+
+        c.execute("DELETE FROM users")
+        conn.commit()

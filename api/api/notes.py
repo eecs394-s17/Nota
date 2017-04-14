@@ -91,7 +91,7 @@ class Notes(Resource):
 
             notes.append(current_notes)
 
-        notes_json = { "all_notes" : notes }
+        notes_json = { "notes" : notes }
 
         return notes_json
 
@@ -176,10 +176,8 @@ class Notes(Resource):
             c.execute("DELETE FROM notes WHERE id ='" + notes_id + "'")
             conn.commit()
 
-            return { "deleted" : notes_id }
+            return { "id" : notes_id }
 
 
         c.execute("DELETE FROM notes")
         conn.commit()
-
-        return { "deleted" : "all notes deleted" }
