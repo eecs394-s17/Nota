@@ -41,6 +41,7 @@ import { AuthService } from '../providers/auth-service';
     NotesPage,
     TabsPage,
     UploadingPage,
+    NoteViewPage,
     LoginPage,
     RegisterPage
   ],

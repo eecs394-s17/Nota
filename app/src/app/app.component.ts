@@ -13,7 +13,7 @@ import {RegisterPage} from "../pages/register/register";
 })
 export class MyApp {
   // rootPage:any = LoginPage;
-  rootPage:any = RegisterPage;
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

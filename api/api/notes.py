@@ -18,8 +18,8 @@ class Notes(Resource):
 
     def __init__(self):
 
-        self.conn = get_db()
-        self.conn.row_factory = dict_factory
+        conn = get_db()
+        conn.row_factory = dict_factory
 
     # TODO: maybe build this out later
     # def setup(handler_function):
@@ -45,7 +45,9 @@ class Notes(Resource):
 
         notes = []
 
-        c = self.conn.cursor()
+        conn = get_db()
+        conn.row_factory = dict_factory
+        c = conn.cursor()
 
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=str, required=False, location="args")
@@ -136,12 +138,14 @@ class Notes(Resource):
             f.write(image)
 
         # connect to the database
-        c = self.conn.cursor()
+        conn = get_db()
+        conn.row_factory = dict_factory
+        c = conn.cursor()
 
         # add the stuff to database
         # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
         c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
-        self.conn.commit()
+        conn.commit()
 
         last_row_id = c.lastrowid
 
@@ -154,7 +158,9 @@ class Notes(Resource):
         2) /api/v1/notes/{id} -> this will delete the notes associated with the id
         """
 
-        c = self.conn.cursor()
+        conn = get_db()
+        conn.row_factory = dict_factory
+        c = conn.cursor()
 
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=str, required=False, location="args")
@@ -173,12 +179,12 @@ class Notes(Resource):
             os.remove(requested_notes["filename"])
 
             c.execute("DELETE FROM notes WHERE id ='" + notes_id + "'")
-            self.conn.commit()
+            conn.commit()
 
             return { "deleted" : notes_id }
 
 
         c.execute("DELETE FROM notes")
-        self.conn.commit()
+        conn.commit()
 
         return { "deleted" : "all notes deleted" }

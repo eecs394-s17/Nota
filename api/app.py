@@ -1,9 +1,11 @@
 from flask import Flask, Response
 from flask_restful import Resource, Api, reqparse
 from flask import abort
-from app import notes
+from api import notes
 
 from flask import g
+
+import os
 
 import datetime
 
@@ -288,5 +290,11 @@ api.add_resource(notes.Notes, "/api/v1/notes")
 api.add_resource(Users, "/api/v1/users")
 
 if __name__ == '__main__':
+
     app.config["SECRET_KEY"] = "ITSASECRET"
-    app.run(host='0.0.0.0', debug=False)
+
+    debug = os.environ.get('DEBUG')
+    if debug:
+        app.run(debug=True)
+    else:
+        app.run(host="0.0.0.0", debug=False)
