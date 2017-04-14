@@ -16,11 +16,6 @@ import base64
 
 class Notes(Resource):
 
-    def __init__(self):
-
-        conn = get_db()
-        conn.row_factory = dict_factory
-
     # TODO: maybe build this out later
     # def setup(handler_function):
     #
