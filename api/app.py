@@ -78,4 +78,9 @@ api.add_resource(notes.Notes, "/api/v1/notes")
 if __name__ == '__main__':
 
     app.config["SECRET_KEY"] = "ITSASECRET"
-    app.run(host='0.0.0.0', debug=False)
+
+    debug = os.environ.get('DEBUG')
+    if debug:
+        app.run(debug=True, debug=False)
+    else:
+        app.run(host="0.0.0.0")
