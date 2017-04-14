@@ -3,9 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask import abort
 from app import notes
 
-
 from flask import g
-
 
 import datetime
 

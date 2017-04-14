@@ -17,9 +17,24 @@ import base64
 class Notes(Resource):
 
     def __init__(self):
-        pass
 
-    # TODO: pull out the stuff common to the get and delete methods
+        self.conn = get_db()
+        self.conn.row_factory = dict_factory
+
+    # TODO: maybe build this out later
+    # def setup(handler_function):
+    #
+    #     def setup_wrapper(notes_class):
+    #
+    #         print resource_class
+    #
+    #         parser = reqparse.RequestParser()
+    #
+    #         return handler_function(notes_class)
+    #
+    #     return setup_wrapper
+
+    # TODO: pull out the stuff common to the get and delete methods like in a decorator
     def get(self):
         """
         there are two ways to access this endpoint via a get request:
@@ -30,9 +45,7 @@ class Notes(Resource):
 
         notes = []
 
-        conn = get_db()
-        conn.row_factory = dict_factory
-        c = conn.cursor()
+        c = self.conn.cursor()
 
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=str, required=False, location="args")
@@ -123,13 +136,12 @@ class Notes(Resource):
             f.write(image)
 
         # connect to the database
-        conn = get_db()
-        c = conn.cursor()
+        c = self.conn.cursor()
 
         # add the stuff to database
         # c.execute("INSERT INTO notes VALUES ( 'NULL' + '" + unique_filename + "', '" + upload_date + "', '" + course + "', '" + title + "', '" + price + "', '" + "', '" + description + "', '" + str(userID) +  "')")
         c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, userID) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, userID))
-        conn.commit()
+        self.conn.commit()
 
         last_row_id = c.lastrowid
 
@@ -142,9 +154,7 @@ class Notes(Resource):
         2) /api/v1/notes/{id} -> this will delete the notes associated with the id
         """
 
-        conn = get_db()
-        conn.row_factory = dict_factory
-        c = conn.cursor()
+        c = self.conn.cursor()
 
         parser = reqparse.RequestParser()
         parser.add_argument("id", type=str, required=False, location="args")
@@ -163,12 +173,12 @@ class Notes(Resource):
             os.remove(requested_notes["filename"])
 
             c.execute("DELETE FROM notes WHERE id ='" + notes_id + "'")
-            conn.commit()
+            self.conn.commit()
 
             return { "deleted" : notes_id }
 
 
         c.execute("DELETE FROM notes")
-        conn.commit()
+        self.conn.commit()
 
         return { "deleted" : "all notes deleted" }
