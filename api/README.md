@@ -29,7 +29,7 @@ $ source api/bin/activate
 $ python app.py
 ```
 
-## Examples
+## API Docs
 * the notes endpoint accepts 3 different types of request in accordance with restful principles (GET, POST, DELETE)
 
 * GET
