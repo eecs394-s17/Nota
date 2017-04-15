@@ -26,6 +26,7 @@ export class NoteViewPage {
   price:string = "";
   note:any;
   description:string = "";
+  noteID:number;
 
   constructor(private _domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
@@ -54,8 +55,17 @@ export class NoteViewPage {
     this.description = this.navParams.get('description');
     this.price = this.navParams.get('price');
     this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
-    // this.note = this.navParams.get('note');
-    console.log("note is...: ");
+    this.noteID = this.navParams.get('noteID');
+
+    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.noteID) 
+        .subscribe(data => {
+          var res = data.json();
+          var base64 = res["notes"];
+          this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
+        })
+
+
+    console.log("note is...:");
     console.log(this.note);
   }
 

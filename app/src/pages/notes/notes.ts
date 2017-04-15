@@ -16,7 +16,7 @@ import { NoteViewPage } from '../note-view/note-view';
 // AKA NotesPage
 export class NotesPage {
 	notes: Array<string> = [];
-  items: Array<{title: string, course: string, upload_date: string, price: string, note: string, description: string}>;
+  items: Array<{title: string, course: string, upload_date: string, price: string, description: string, noteID: number}>;
 	posts: any;
 
   constructor(public navCtrl: NavController, public http: Http, public plt: Platform,) {
@@ -67,7 +67,7 @@ export class NotesPage {
           var res = data.json();
           console.log(res);
           // this.items.push( { courseName: res['courseName'],}) etc.
-          var all_notes = res["all_notes"];
+          var all_notes = res["notes"];
           console.log(all_notes.length);
           for (let i = 0; i< all_notes.length; i++){
             console.log(all_notes[i]);
@@ -76,14 +76,11 @@ export class NotesPage {
               course: all_notes[i].course,
               upload_date: all_notes[i].upload_date,
               price: all_notes[i].price,
-              note: all_notes[i].notes,
-              description: all_notes[i].description
+              description: all_notes[i].description,
+              noteID: all_notes[i].id
             });
 
           }
-
-
-
 
         });
   }
