@@ -25,7 +25,7 @@ export class AboutPage {
 		title: ["", Validators.required],
     	course: ["", Validators.required], //validator not working because submit button fires post function on click
     	description: ["", Validators.required],
-    	price: ["", Validators.required]
+    	price: ["", Validators.compose([Validators.pattern('^[0-9]+$'),Validators.required])]
 	});
 	uploadingPage = UploadingPage;
 
@@ -36,31 +36,31 @@ export class AboutPage {
   }
 
    openAlbums = () : void => {
-        this.plugins.albums.open().then((imgUrls) => {            
+        this.plugins.albums.open().then((imgUrls) => {
             if(imgUrls) {
-            this.images.push(imgUrls);   
+            this.images.push(imgUrls);
             var base64image = document.getElementById("preview");
-		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imgUrls+ "'>";       
-          } 
-        });        
+		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imgUrls+ "'>";
+          }
+        });
     }
-      
-    openCamera = () : void => { 
-        this.plugins.camera.open().then((imageUrl) => { 
+
+    openCamera = () : void => {
+        this.plugins.camera.open().then((imageUrl) => {
           if(imageUrl) {
             this.images.push(imageUrl);
             var base64image = document.getElementById("preview");
-		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imageUrl+ "'>";   
+		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imageUrl+ "'>";
           }
       });
     }
-    
+
     startUploading = () : void => {
       this.navCtrl.setRoot(UploadingPage, {
           images: this.images
       });
       console.log(this.images[0]);
-      }  
+      }
 
 
 makePostRequest() {
@@ -74,9 +74,9 @@ makePostRequest() {
     console.log(this.images[0]);
 
     console.log(data1);
-    
 
-    
+
+
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
 
     this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
@@ -91,12 +91,12 @@ makePostRequest() {
         console.log(JSON.stringify(error.json()));
     });
 
-    this.navCtrl.push(UploadingPage); 
+    this.navCtrl.push(UploadingPage);
     // This may not be the best way to load it, try passing it  via navCtrl
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
 
-}} 
+}}
 
 
 
