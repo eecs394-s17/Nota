@@ -3,11 +3,12 @@ page-note-view {
 }
 
 
-h2{
-  font-family: 'Fjalla One', sans-serif;
+h3{
+  font-family: "Noto Sans", sans-serif;
+  padding: 0;
+  margin: 0;
   color: black;
-  text-transform: uppercase;
-  font-size: 1.5em !important;
+//  text-transform: uppercase;
 }
 
 p{
@@ -20,8 +21,9 @@ p{
   color: black;
 }
 
-.view{
-  padding-left: 20%;
+#price{
+  text-align: right;
+
 }
 
 button {

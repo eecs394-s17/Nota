@@ -7,29 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title class="view">view</ion-title>
+    <ion-title class="view">{{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col col-9>
+       <h3>{{title}}</h3>
+    </ion-col>
 
-<ion-content padding>
-  <h2 class="information">{{title}}</h2>
+    <ion-col id = "price" col-3 >
+      ${{price}}
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+ <img [src]="image"/>
+
   <p class="information">{{course}}</p>
   <p class="information">${{price}}</p>
   <p class="information">{{upload_date}}</p>
   <p class="information">{{description}}</p>
 
-
+</ion-content>
 
 
   <!-- <p>{{note}} fdf</p> -->
 
   <!-- <p>{{note}}</p> -->
-  <img [src]="image"/>
+  <
+ 
   <!-- <img [src] = '_domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64,{{note}})")'> -->
 
   
 
-
-</ion-content>
