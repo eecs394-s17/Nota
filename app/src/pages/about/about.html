@@ -14,19 +14,7 @@
 
 <ion-content padding>
 
-<div text-center> <!-- alignment not working -->
-<ion-buttons style="align-items: center">
-      <button ion-button icon-only (click) = "openCamera()">
-        <ion-icon name="camera"></ion-icon>
-      </button>
-</ion-buttons>
 
-<ion-buttons>
-      <button ion-button icon-only (click) = "openAlbums()">
-        <ion-icon name="images"></ion-icon>
-      </button>
-</ion-buttons>
-</div>
 
 
 <ion-list>
@@ -43,7 +31,7 @@
       <ion-input formControlName="course" type="text"></ion-input>
     </ion-item>
 
-  
+
 
     <ion-item>
       <ion-label floating>Price</ion-label>
@@ -55,12 +43,26 @@
       <ion-input formControlName="description" type="text"></ion-input>
     </ion-item>
 
+    <div text-center> <!-- alignment not working -->
+      <ion-buttons style="align-items: center">
+        <button ion-button icon-only (click) = "openCamera()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-buttons>
+        <button ion-button icon-only (click) = "openAlbums()">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </ion-buttons>
+    </div>
+
       <button type="submit" color="secondary" ion-button block [disabled]="!form.valid" >Upload</button>
     </form>
 </ion-list>
 
 <ion-item id="preview">
-  
+
 </ion-item>
 
 <ion-content padding>

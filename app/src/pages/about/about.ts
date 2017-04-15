@@ -22,10 +22,11 @@ export class AboutPage {
 	images: Array<string> = [];
 	public base64Image: string; //unused var, delete?
 	public form = this.fb.group({
-		title: ["", Validators.required],
+		  title: ["", Validators.required],
     	course: ["", Validators.required], //validator not working because submit button fires post function on click
     	description: ["", Validators.required],
-    	price: ["", Validators.compose([Validators.pattern('^[0-9]+$'),Validators.required])]
+    	price: ["", Validators.compose([Validators.pattern('^[0-9]+$'),Validators.required])],
+      images: [[], Validators.required]
 	});
 	uploadingPage = UploadingPage;
 
@@ -39,6 +40,7 @@ export class AboutPage {
         this.plugins.albums.open().then((imgUrls) => {
             if(imgUrls) {
             this.images.push(imgUrls);
+            this.form.value.images.push(imgUrls);
             var base64image = document.getElementById("preview");
 		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imgUrls+ "'>";
           }
@@ -49,6 +51,7 @@ export class AboutPage {
         this.plugins.camera.open().then((imageUrl) => {
           if(imageUrl) {
             this.images.push(imageUrl);
+            this.form.value.images.push(imageUrl);
             var base64image = document.getElementById("preview");
 		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imageUrl+ "'>";
           }
@@ -64,6 +67,7 @@ export class AboutPage {
 
 
 makePostRequest() {
+
 	var data1 = {
 				'notes': this.images[0],
         'title': this.form.value.title,
