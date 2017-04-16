@@ -67,7 +67,7 @@ export class NotesPage {
           var res = data.json();
           console.log(res);
           // this.items.push( { courseName: res['courseName'],}) etc.
-          var all_notes = res["all_notes"];
+          var all_notes = res["notes"];
           console.log(all_notes.length);
           for (let i = 0; i< all_notes.length; i++){
             console.log(all_notes[i]);
