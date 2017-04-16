@@ -5,18 +5,18 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
-var getStatus; 
+var getStatus;
 
 export class User {
   name: string;
   email: string;
- 
+
   constructor(name: string, email: string) {
     this.name = name;
     this.email = email;
   }
 }
- 
+
 
 
 /*
@@ -44,9 +44,9 @@ export class AuthService {
    persistingData: any;
    email2:string = "";
    password2:string= "";
- 
+
    public login(credentials) {
-   
+
 
 
 
@@ -66,7 +66,7 @@ export class AuthService {
       });
     }
    }
- 
+
   public register(credentials) {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
@@ -78,11 +78,11 @@ export class AuthService {
       });
     }
   }
- 
+
   public getUserInfo() : User {
     return this.currentUser;
   }
- 
+
   public logout() {
     return Observable.create(observer => {
       this.currentUser = null;
@@ -91,16 +91,16 @@ export class AuthService {
     });
   }
 
-  public makeGetRequest(credentials): Promise<string> {
-    var data1 = {
-      'email': credentials.email,
-      'password': credentials.password
-    };
-    return this.http.get("http://0.0.0.0:5000/api/v1/users", data1)
-                      .toPromise()
-                      .then(this.extractData)
-                      .catch(this.handleError);
-  }
+  // public makeGetRequest(credentials): Promise<string> {
+  //   var data1 = {
+  //     'email': credentials.email,
+  //     'password': credentials.password
+  //   };
+  //   return this.http.get("http://0.0.0.0:5000/api/v1/users", data1)
+  //                     .toPromise()
+  //                     .then(this.extractData)
+  //                     .catch(this.handleError);
+  // }
 
   private extractData(res: Response) {
     // console.log("Extracting")
@@ -126,41 +126,39 @@ private handleError (error: Response | any) {
 
 
 
-  // public makeGetRequest(credentials) {
-  //   var data1 = {
-  //     'email': credentials.email,
-  //     'password': credentials.password
-  //   };
-  //   // this.randomQuote;
-  //   console.log("credentials are ", data1);
-  //   // var response = {};
-  //   this.http.get("http://0.0.0.0:5000/api/v1/users", data1)
-  //     .map(res => res.json())
-  //     .map(meawesome => {
-  //       return meawesome
-  //     }).toPromise();
-  //     .subscribe(
-  //       data => this.persistingData = data,
-  //       err => this.logError(err),
-  //       () => console.log('Random quote complete' + this.persistingData)
+  public makeGetRequest(credentials) {
+    var data1 = {
+      'email': credentials.email,
+      'password': credentials.password
+    };
+    // // this.randomQuote;
+    // console.log("credentials are ", data1);
+    // // var response = {};
+    // this.http.get("http://0.0.0.0:5000/api/v1/users", data1)
+    //   .map(res => res.json())
+    //   .map(meawesome => {
+    //     return meawesome
+    //   }).toPromise();
+    //   .subscribe(
+    //     data => this.persistingData = data,
+    //     err => this.logError(err),
+    //     () => console.log('Random quote complete' + this.persistingData)
+    //
+    //   );
 
-  //     );
-      
-  //     // console.log("data is ", res.text());  
+      // console.log("data is ", res.text());
 
-  //     this.http.get("http://0.0.0.0:5000/api/v1/users")
-  //      .subscribe(data => {
-  //        var res = data.json();
-  //        this.email2 = res["users"][0]["email"];
-  //        this.password2 = res["users"][0]["password"];
-  //        console.log(res["users"][0]["email"]);
-  //        console.log(res["users"]);
-  //        console.log(res);
-  //        console.log("password2 in get request: " + this.password2);
-  //      })  
-
-
-  // }
+      this.http.get("http://0.0.0.0:5000/api/v1/users")
+       .subscribe(data => {
+         var res = data.json();
+         this.email2 = res["users"][0]["email"];
+         this.password2 = res["users"][0]["password"];
+         console.log(res["users"][0]["email"]);
+         console.log(res["users"]);
+         console.log(res);
+         console.log("password2 in get request: " + this.password2);
+       })
+  }
 
   // logError(err) {
   //   console.error('There was an error: ' + err);
@@ -192,7 +190,7 @@ private handleError (error: Response | any) {
 
 
   //     .subscribe(data => {
-          
+
   //       });
   //       for(i=0; i<100;i++) {
   //         var x = i;

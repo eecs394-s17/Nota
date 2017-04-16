@@ -7,7 +7,7 @@ import { TabsPage } from '../tabs/tabs';
 import { Http } from '@angular/http';
 
 
- 
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -15,28 +15,32 @@ import { Http } from '@angular/http';
 export class LoginPage {
   loading: Loading;
   registerCredentials = {email: '', password: ''};
- 
+  email2:string = "";
+  password2:string = "";
+
   constructor(private http: Http, private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
- 
+
   public createAccount() {
     this.nav.push(RegisterPage);
   }
- 
+
   public login() {
-    this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {
-        setTimeout(() => {
-        this.loading.dismiss();
-        this.nav.setRoot(TabsPage)
-        });
-      } else {
-        this.showError("Access Denied");
-      }
-    },
-    error => {
-      this.showError(error);
-    })
+    //this.showLoading()
+    // this.auth.login(this.registerCredentials).subscribe(allowed => {
+    //   if (allowed) {
+    //     setTimeout(() => {
+    //     this.loading.dismiss();
+    //     this.nav.setRoot(TabsPage)
+    //     });
+    //   } else {
+    //     this.showError("Access Denied");
+    //   }
+    // },
+    // error => {
+    //   this.showError(error);
+    // })
+    this.makeGetRequest(this.registerCredentials);
+
   }
 
 
@@ -60,27 +64,54 @@ export class LoginPage {
   //     //   } else {
   //     //     this.showError("Access Denied");
   //     //   }
-        
-  //     // } 
+
+  //     // }
   //   },
   //   error => {
   //     console.log("there was error");
   //     this.showError(error);
   //   });
   // }
- 
+
+  makeGetRequest(credentials) {
+    this.http.get("http://0.0.0.0:5000/api/v1/users")
+      .subscribe(data => {
+        var res = data.json();
+        this.email2 = res["users"][0]["email"];
+        this.password2 = res["users"][0]["password"];
+        console.log(res["users"][0]["email"]);
+        console.log(res["users"]);
+        console.log(res);
+        console.log("password2 in get request: " + this.password2);
+        this.checker();
+      })
+  }
+
+  checker() {
+    if (this.password2 == this.registerCredentials.password && this.email2 == this.registerCredentials.email)
+    {
+      console.log("YAY THIS IS GOOD");
+      this.nav.setRoot(TabsPage);
+    }
+    else {
+      console.log("NO THIS IS BAD")
+    }
+
+
+  }
+
   showLoading() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
     this.loading.present();
   }
- 
+
   showError(text) {
     setTimeout(() => {
       this.loading.dismiss();
     });
- 
+
     let alert = this.alertCtrl.create({
       title: 'Fail',
       subTitle: text,
@@ -89,29 +120,5 @@ export class LoginPage {
     alert.present(prompt);
   }
 
-  makeGetRequest() {
-    var data1 = {
-      'email': this.registerCredentials.email,
-      'password': this.registerCredentials.password
-    };
-
-    console.log(data1);
-    // var response = {};
-
-    this.http.get("http://0.0.0.0:5000/api/v1/users", data1)
-      .subscribe(data => {
-        // var response = data;
-        // var alert = Alert.create({
-        //     title: "Data String",
-        //     subTitle: data.json().data,
-        //     buttons: ["close"]
-        // });
-        // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
-      }, error => {
-        console.log(JSON.stringify(error.json()));
-        console.log('fail')
-      });
-      // return response;
-  }
 
 }
