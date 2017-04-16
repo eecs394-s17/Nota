@@ -23,6 +23,9 @@ import sqlite3
 app = Flask(__name__)
 api = Api(app)
 
+
+
+
 # login_manager = LoginManager()
 # login_manager.init_app(app)
 
@@ -65,6 +68,11 @@ api = Api(app)
 # @login_required
 # def protected():
 #     return Response(response="Hello Protected World!", status=200)
+
+
+
+
+
 
 
 @app.teardown_appcontext

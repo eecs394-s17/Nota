@@ -16,16 +16,49 @@ class Users(Resource):
         1) /api/v1/users -> this will return the data for all users
         2) /api/v1/users/{id} -> this will return data for the user specified by the id
         """
-
         conn = get_db()
         conn.row_factory = dict_factory
         c = conn.cursor()
+        c.execute("SELECT * FROM users WHERE id='" + str(1) + "'")
+
+    
 
         parser = reqparse.RequestParser()
-        parser.add_argument("id", type=str, required=False)
+
+
+        # CASE 1: Check for login
+        parser.add_argument("email", type=str, location = 'headers', required=False)
+        parser.add_argument("password", type=str, location='headers', required=False)
+        args = parser.parse_args()
+        user_email = args["email"]
+        user_pass = args["password"]
+        # return {user_email   }
+        if user_email != None:
+            # print "got in email ", user_email, " i want this syntax to wokr"
+            users = []
+            for row in c.execute("SELECT * FROM users"):
+                # print "looking at ", row
+                current_user = {
+                                "id": row["id"],
+                                "email": row["email"],
+                                "password": row["password"]
+                                }
+                # print "we are checking ", current_user["email"]
+                if current_user["email"] == user_email and current_user["password"] == user_pass:
+                    return current_user
+            print "login invalid, aborting"
+            abort(400)
+
+
+       
+
+        # CASE 2: Check email and password
+        parser.add_argument("id", type=str, location='headers', required=False)
         args = parser.parse_args()
 
         user_id = args["id"]
+
+
         if user_id != None:
 
             c.execute("SELECT * FROM users WHERE id='" + user_id + "'")
@@ -42,6 +75,8 @@ class Users(Resource):
 
             return user_data
 
+
+        # CASE 3: Retrieve all users
         users = []
 
         for row in c.execute("SELECT * FROM users"):

@@ -52,8 +52,6 @@ export class RegisterPage {
 
   makePostRequest() {
     var data1 = {
-      'firstName': this.registerCredentials.firstName,
-      'lastName': this.registerCredentials.lastName,
       'email': this.registerCredentials.email,
       'password': this.registerCredentials.password
     };
