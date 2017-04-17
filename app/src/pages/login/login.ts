@@ -87,10 +87,10 @@ export class LoginPage {
     this.http.get("http://0.0.0.0:5000/api/v1/users", requestOptions)
       .subscribe((data) => {
         var res = data.json();
-        //for (var i = 0; i < res["users"].length; i++) {
-        //}
-        // this.email2 = res["users"][1]["email"];
-        // this.password2 = res["users"][1]["password"];
+        for (var i = 0; i < res["users"].length; i++) {
+        }
+        this.email2 = res["users"][0]["email"];
+        this.password2 = res["users"][0]["password"];
         // console.log(res["users"][0]["email"]);
         // console.log(res["users"][0]);
         console.log(res);
