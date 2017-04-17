@@ -84,10 +84,21 @@ export class LoginPage {
       'email': credentials.email,
       'password': credentials.password
     };
+    var isMatch = false;
     this.http.get("http://0.0.0.0:5000/api/v1/users", requestOptions)
       .subscribe((data) => {
         var res = data.json();
         for (var i = 0; i < res["users"].length; i++) {
+          if (credentials.email == res["users"][i]["email"]) {
+            if (credentials.password == res["users"][i]["password"]) {
+              console.log("Password is good, redirecting to tabsPage");
+              this.nav.setRoot(TabsPage);
+              isMatch = true;
+            }
+          }
+        }
+        if (isMatch != true) {
+          alert("EMAIL OR PASSWORD IS WRONG!");
         }
         this.email2 = res["users"][0]["email"];
         this.password2 = res["users"][0]["password"];
@@ -95,7 +106,7 @@ export class LoginPage {
         // console.log(res["users"][0]);
         console.log(res);
         //console.log("password2 in get request: " + this.password2);
-        this.checkCredentials();
+        //this.checkCredentials();
       },
         (err) => alert("Email or Password is Wrong"))
   }
