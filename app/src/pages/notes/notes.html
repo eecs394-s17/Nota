@@ -12,12 +12,21 @@
 
 <ion-list>
 <button ion-item *ngFor="let item of items" (click)="launchNoteViewPage(item)">
-    <h2> {{item.title}}</h2>
-    <p>  {{item.course}}</p>
+    <h2> {{item.course}}</h2>
+    <p>  {{item.title}}</p>
     <p>  {{item.upload_date}}</p>
     <p>  ${{item.price}}</p>
 
 </button>
+
+    <button ion-item>
+        <h2>EECS 394</h2>
+        <p>Lecture 2</p>
+        <p>1/2/3 12:30:11</p>
+        <p>$12</p>
+    </button>
+
+
 </ion-list>
 
 
