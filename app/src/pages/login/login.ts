@@ -4,7 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, URLSearchParams } from '@angular/http';
 
 
 
@@ -25,7 +25,6 @@ export class LoginPage {
   }
 
   public login() {
-    //this.showLoading()
     // this.auth.login(this.registerCredentials).subscribe(allowed => {
     //   if (allowed) {
     //     setTimeout(() => {
@@ -74,27 +73,43 @@ export class LoginPage {
   // }
 
   makeGetRequest(credentials) {
-    this.http.get("http://0.0.0.0:5000/api/v1/users")
-      .subscribe(data => {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('email', credentials.email);
+    params.set('password', credentials.password);
+
+    let requestOptions = new RequestOptions();
+    requestOptions.search = params;
+
+    var data1 = {
+      'email': credentials.email,
+      'password': credentials.password
+    };
+    this.http.get("http://0.0.0.0:5000/api/v1/users", requestOptions)
+      .subscribe((data) => {
         var res = data.json();
-        this.email2 = res["users"][0]["email"];
-        this.password2 = res["users"][0]["password"];
-        console.log(res["users"][0]["email"]);
-        console.log(res["users"]);
+        //for (var i = 0; i < res["users"].length; i++) {
+        //}
+        // this.email2 = res["users"][1]["email"];
+        // this.password2 = res["users"][1]["password"];
+        // console.log(res["users"][0]["email"]);
+        // console.log(res["users"][0]);
         console.log(res);
-        console.log("password2 in get request: " + this.password2);
-        this.checker();
-      })
+        //console.log("password2 in get request: " + this.password2);
+        this.checkCredentials();
+      },
+        (err) => alert("Email or Password is Wrong"))
   }
 
-  checker() {
+  checkCredentials() {
     if (this.password2 == this.registerCredentials.password && this.email2 == this.registerCredentials.email)
     {
-      console.log("YAY THIS IS GOOD");
+      console.log("Password is good, redirecting to tabsPage");
       this.nav.setRoot(TabsPage);
     }
     else {
-      console.log("NO THIS IS BAD")
+      console.log("Password/Email is wrong, Alerting")
+      //this.showError("Email or Password is Wrong");
+      //alert("Email or Password is Wrong");
     }
 
 

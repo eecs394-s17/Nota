@@ -151,12 +151,12 @@ private handleError (error: Response | any) {
       this.http.get("http://0.0.0.0:5000/api/v1/users")
        .subscribe(data => {
          var res = data.json();
-         this.email2 = res["users"][0]["email"];
-         this.password2 = res["users"][0]["password"];
-         console.log(res["users"][0]["email"]);
-         console.log(res["users"]);
+         //this.email2 = res["users"][0]["email"];
+         //this.password2 = res["users"][0]["password"];
+         //console.log(res["users"][0]["email"]);
+         //console.log(res["users"]);
          console.log(res);
-         console.log("password2 in get request: " + this.password2);
+         //console.log("password2 in get request: " + this.password2);
        })
   }
 
