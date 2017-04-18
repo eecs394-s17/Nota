@@ -1,0 +1,36 @@
+
+<script src="lib/s3-image-uploader/dist/image-uploader.min.js"></script>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      UPLOAD
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<div text-center> <!-- alignment not working -->
+      <ion-buttons style="align-items: center">
+        <button type="button" ion-button icon-only (click) = "openCamera()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      <ion-buttons>
+        <button type="button" ion-button icon-only (click) = "openAlbums()">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </ion-buttons>
+</div>
+
+
+
+ <button type="submit" color="secondary" ion-button block>Upload</button>
+
+<ion-item id="test">
+ <!-- <img src="http://placehold.it/350x450?text=Pick+an+image"> -->
+</ion-item>
+
+</ion-content>
