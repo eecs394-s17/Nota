@@ -25,7 +25,8 @@ export class NotesPage {
 
   	this.plt.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
-      // this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes") 
+
+      // this.http.get("http://sebastianperez.pythonanywhere.com/api/v1/notes")
       // 	.subscribe(data => {
       // 		var res = data.json();
       //     console.log(res);
@@ -62,10 +63,11 @@ export class NotesPage {
     this.items = [];
 
     // this.http.get("/api")
-   this.http.get("http://34.209.98.85:5000/api/v1/notes") 
+   this.http.get("http://34.209.98.85:5000/api/v1/notes")
         .subscribe(data => {
           var res = data.json();
           console.log(res);
+
           // this.items.push( { courseName: res['courseName'],}) etc.
           var all_notes = res["notes"];
           console.log(all_notes.length);
@@ -119,9 +121,3 @@ export class NotesPage {
 // $scope.doThisFunction = function(){
 //     document.getElementById("test").innerHTML = "AJOOAOA";
 // };
-
-
-
-
-
-

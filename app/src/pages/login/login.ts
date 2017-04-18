@@ -13,6 +13,7 @@ import { Http, RequestOptions, URLSearchParams } from '@angular/http';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+
   loading: Loading;
   registerCredentials = {email: '', password: ''};
   email2:string = "";
@@ -84,6 +85,7 @@ export class LoginPage {
       'email': credentials.email,
       'password': credentials.password
     };
+
     var isMatch = false;
     this.http.get("http://0.0.0.0:5000/api/v1/users", requestOptions)
       .subscribe((data) => {
@@ -91,8 +93,11 @@ export class LoginPage {
         for (var i = 0; i < res["users"].length; i++) {
           if (credentials.email == res["users"][i]["email"]) {
             if (credentials.password == res["users"][i]["password"]) {
-              console.log("Password is good, redirecting to tabsPage");
+
+              // setting the userid
+              localStorage.setItem('id', res["users"][i]["id"]);
               this.nav.setRoot(TabsPage);
+
               isMatch = true;
             }
           }

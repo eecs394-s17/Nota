@@ -61,7 +61,7 @@ export class RegisterPage {
 
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
 
-    this.http.post("http://34.209.98.85:5000/api/v1/users", data1)
+    this.http.post("http://localhost:5000/api/v1/users", data1)
       .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
