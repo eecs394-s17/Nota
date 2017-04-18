@@ -1,51 +1,26 @@
 page-register {
   .register-content {
-    background: #56CA96;
+    background: #000000;
  
     .register-box {
-      background: #509287;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
+      padding: 0px 20px 0px 20px;
     }
  
-    ion-row {
-       align-items: center;
-       text-align: center;
-     }
- 
-     ion-item {
-         border-radius: 30px !important;
-         padding-left: 30px !important;
-         font-size: 0.9em;
-         margin-bottom: 10px;
-         border: 1px solid #ffffff;
-         border-bottom: 0px !important;
-         box-shadow: none !important;
-     }
- 
-     .signup-col {
-       margin: 0px 16px 0px 16px;
-       padding-bottom: 20px;
-     }
-
-    .item-inner {
-      box-shadow: none !important;
+    .ion-row {
+      align-items: center;
+      text-align: center;
     }
 
     .fa-arrow-right{
       color: #00f1ff;
-
-
     }
 
     .submit-btn {
-      border-radius: 0px !important;
       border: none;
     }
 
     .input {
       position: relative;
-      z-index: 1;
       display: inline-block;
       margin: 1em;
       max-width: 400px;
@@ -59,12 +34,8 @@ page-register {
       float: right;
       width: 60%;
       border: none;
-      border-radius: 0;
-      background: #f0f0f0;
-      color: #aaa;
       font-weight: bold;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      -webkit-appearance: none; /* for box shadows to show on iOS */
+      font-family: 'Cantarell', sans-serif;
     }
 
     .input__field:focus {
@@ -79,14 +50,6 @@ page-register {
       color: #6a7989;
       font-weight: bold;
       font-size: 70.25%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
 
     .input__label-content {
@@ -95,7 +58,6 @@ page-register {
       padding: 1.6em 0;
       width: 100%;
     }
-
 
     .input--nota {
       overflow: hidden;
@@ -122,6 +84,8 @@ page-register {
 
     .input__label-content--nota {
       position: absolute;
+      -webkit-transition: -webkit-transform 0.3s;
+      transition: transform 0.3s;
     }
 
     .input__label--nota::before,
@@ -137,15 +101,11 @@ page-register {
 
     .input__label--nota::after {
       margin-top: 2px;
-      border-bottom: 4px solid red;
+      border-bottom: 4px solid #00f1ff;
       -webkit-transform: translate3d(-100%, 0, 0);
       transform: translate3d(-100%, 0, 0);
       -webkit-transition: -webkit-transform 0.3s;
       transition: transform 0.3s;
-    }
-
-    .input__label--nota-color::after {
-      border-color: #00f1ff;
     }
 
     .input__field--nota:focus + .input__label--nota::after,

@@ -12,22 +12,33 @@
         <ion-col>
           <ion-list inset>
 
-            <ion-item>
-              <ion-input type="text" placeholder="First Name" name="firstName" [(ngModel)]="registerCredentials.firstName" required></ion-input>
-            </ion-item>
+            <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-firstName" name="firstName" [(ngModel)]="registerCredentials.firstName" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-firstName">
+						<span class="input__label-content input__label-content--nota">first name</span>
+					</label>
+				</span>
 
-            <ion-item>
-              <ion-input type="text" placeholder="Last Name" name="lastName" [(ngModel)]="registerCredentials.lastName" required></ion-input>
-            </ion-item>
+            <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-lastName" name="lastName" [(ngModel)]="registerCredentials.lastName" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-lastName">
+						<span class="input__label-content input__label-content--nota">last name</span>
+					</label>
+				</span>
 
-            <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
-            </ion-item>
+            <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-email" name="email" [(ngModel)]="registerCredentials.email" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-email">
+						<span class="input__label-content input__label-content--nota">email</span>
+					</label>
+				</span>
 
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
-            </ion-item>
-
+            <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-password" name="password" [(ngModel)]="registerCredentials.password" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-password">
+						<span class="input__label-content input__label-content--nota">password</span>
+					</label>
+				</span>
           </ion-list>
         </ion-col>
       </ion-row>
