@@ -17,8 +17,8 @@ export class TabsPage {
 
   constructor() {
 
-      console.log("IDDDDDDDD");
-      console.log(localStorage.getItem('id');)
+      console.log("IDDDDDDDD")
+      console.log(localStorage.getItem('id'))
 
   }
 }
