@@ -4,8 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="login-content" padding>
-  <div class="login-box">
+<ion-content class="register-content" padding>
+  <div class="register-box">
 
     <form (ngSubmit)="register()" #registerForm="ngForm">
       <ion-row>
@@ -34,8 +34,7 @@
 
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid" >Register</button>
-        </ion-col>
+          <button ion-button class="btn submit-btn" full type="submit" [disabled]="!registerForm.form.valid"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>        </ion-col>
       </ion-row>
 
     </form>
