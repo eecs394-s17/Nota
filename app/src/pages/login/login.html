@@ -2,7 +2,7 @@
   <ion-row class="logo-row">
     <ion-col></ion-col>
     <ion-col width-67>
-      <img src="http://placehold.it/300x200"/>
+      <img src="img/icon.png" width="90%" height="90%"/>
     </ion-col>
     <ion-col></ion-col>
   </ion-row>
@@ -11,26 +11,31 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-            
-            <ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
-            </ion-item>
-            
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
-            </ion-item>
+            <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-email" type="text" name="email" [(ngModel)]="registerCredentials.email" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-email">
+						<span class="input__label-content input__label-content--nota">email</span>
+					</label>
+				</span>
+              <span class="input input--nota">
+					<input class="input__field input__field--nota" type="text" id="input-password" type="password" name="password" [(ngModel)]="registerCredentials.password" required/>
+					<label class="input__label input__label--nota input__label--nota-color" for="input-password">
+						<span class="input__label-content input__label-content--nota">password</span>
+					</label>
+				</span>
             
           </ion-list>
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
-          <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
+          <button ion-button class="btn submit-btn" full type="submit" [disabled]="!registerForm.form.valid"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></button>
+          <button ion-button class="btn register-btn" block clear (click)="createAccount()"> <b>or create a new account</b></button>
         </ion-col>
       </ion-row>
       
     </form>
   </div>
 </ion-content>
+
