@@ -40,7 +40,6 @@ export class AboutPage {
         this.plugins.albums.open().then((imgUrls) => {
             if(imgUrls) {
             this.images.push(imgUrls);
-            this.form.value.images.push(imgUrls);
             var base64image = document.getElementById("preview");
 		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imgUrls+ "'>";
           }
@@ -51,7 +50,6 @@ export class AboutPage {
         this.plugins.camera.open().then((imageUrl) => {
           if(imageUrl) {
             this.images.push(imageUrl);
-            this.form.value.images.push(imageUrl);
             var base64image = document.getElementById("preview");
 		    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+imageUrl+ "'>";
           }
@@ -73,7 +71,8 @@ makePostRequest() {
         'title': this.form.value.title,
 				'course': this.form.value.course,
 				'description': this.form.value.description,
-				'price': this.form.value.price
+				'price': this.form.value.price,
+        'user_id': 5 //we want to grab id from localStorage?
     };
     console.log(this.images[0]);
 
