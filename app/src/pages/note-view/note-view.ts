@@ -34,34 +34,26 @@ export class NoteViewPage {
   note:any;
   description:string = "";
   noteID:number;
+  base64:string = "";
 
 
   constructor(private _domSanitizer: DomSanitizer, private transfer: Transfer, private file: File, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
-//     this.plt.ready().then((readySource) => {
-//       console.log('Platform ready from', readySource);
-//       this.http.get("http://127.0.0.1:5000/api/v1/notes")
-//         .subscribe(data => {
-//           var res = data.json();
-//           // this.items.push( { courseName: res['courseName'],}) etc.
-//           this.note = res["all_notes"];
-//           //this.notes.push(res["notes"]); // Stores notes data from get request in notes
-//           console.log('yay notes in note-view')
-//   })
-    
 
-// })
   };
  fileTransfer: TransferObject = this.transfer.create();
 
 
   download(){
-    const url = 'http://www.jqueryscript.net/images/Dynamic-Horizontal-Vertical-Image-Slider-Plugin-slideBox.jpg';
-    this.fileTransfer.download(url, this.file.documentsDirectory + 'file.pdf').then((entry) => {
-    console.log('download complete: ' + entry.toURL());
-  }, (error) => {
-    // handle error
-    console.log("test");
-  });
+    console.log(this.base64);
+    const url = "data:image/jpeg;base64," + this.base64;
+
+
+  //   this.fileTransfer.download(url, this.file.documentsDirectory + this.noteID + '.jpg').then((entry) => {
+  //   console.log('download complete: ' + entry.toURL());
+  // }, (error) => {
+  //   // handle error
+  //   console.log("test");
+  // });
   }
 
 
@@ -79,6 +71,7 @@ export class NoteViewPage {
         .subscribe(data => {
           var res = data.json();
           var base64 = res["notes"];
+          this.base64 = base64;
           this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
         })
 

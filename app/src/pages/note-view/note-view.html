@@ -32,8 +32,9 @@
   <p class="information">{{upload_date}}</p>
   <p class="information">{{description}}</p>
 
-      <button ion-button (click)="download()" color="secondary">Download image</button>
+      <button ion-button color="secondary">Download image</button>
 
+      <a href="data:image/jpeg;base64,{{base64}}" download="filename.jpg">test</a>
 
 </ion-content>
 
