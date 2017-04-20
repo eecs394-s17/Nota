@@ -6,7 +6,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { NotesPage } from '../pages/notes/notes';
 import { TabsPage } from '../pages/tabs/tabs';
-import { NoteViewPage } from '../pages/note-view/note-view'
+import { NoteViewPage } from '../pages/note-view/note-view';
+import { PaymentPage } from '../pages/payment/payment';
 import {UploadingPage} from "../pages/uploading/uploading";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -27,7 +28,8 @@ import { AuthService } from '../providers/auth-service';
     UploadingPage,
     NoteViewPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    PaymentPage
 
   ],
   imports: [
@@ -43,7 +45,8 @@ import { AuthService } from '../providers/auth-service';
     UploadingPage,
     NoteViewPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    PaymentPage
   ],
   providers: [
     StatusBar,
