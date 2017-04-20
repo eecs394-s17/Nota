@@ -3,8 +3,8 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 
 import { Http } from '@angular/http';
 
-import {Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-import { File } from '@ionic-native/file';
+// import {Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+// import { File } from '@ionic-native/file';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -22,7 +22,7 @@ declare var cordova: any;
 @Component({
   selector: 'page-note-view',
   templateUrl: 'note-view.html',
-  providers: [Transfer, TransferObject, File]
+  // providers: [File]
 
 })
 export class NoteViewPage {
@@ -34,9 +34,10 @@ export class NoteViewPage {
   note:any;
   description:string = "";
   noteID:number;
+  // base64:string = "";
 
 
-  constructor(private _domSanitizer: DomSanitizer, private transfer: Transfer, private file: File, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
+  constructor(private _domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
 //       console.log('Platform ready from', readySource);
 //       this.http.get("http://127.0.0.1:5000/api/v1/notes")
@@ -51,18 +52,21 @@ export class NoteViewPage {
 
 // })
   };
- fileTransfer: TransferObject = this.transfer.create();
 
 
-  download(){
-    const url = 'http://www.jqueryscript.net/images/Dynamic-Horizontal-Vertical-Image-Slider-Plugin-slideBox.jpg';
-    this.fileTransfer.download(url, this.file.documentsDirectory + 'file.pdf').then((entry) => {
-    console.log('download complete: ' + entry.toURL());
-  }, (error) => {
-    // handle error
-    console.log("test");
-  });
-  }
+
+  // download(){
+  //   // const url = 'http://www.jqueryscript.net/images/Dynamic-Horizontal-Vertical-Image-Slider-Plugin-slideBox.jpg';
+  //   // this.file.createFile(this.file.documentsDirectory, "filename", true);
+  //   console.log("test");
+  //   this.file.removeFile(this.file.documentsDirectory, "filename.jpeg"); 
+  //   var error = this.file.writeFile(this.file.documentsDirectory, "filename.jpeg", b64DecodeUnicode(this.base64), {append: false, replace: true});
+  //   console.log(this.base64);
+  //   console.log("ERRORS:");
+  //   console.log(this.file.cordovaFileError);
+  //   console.log(error);
+
+  // }
 
 
   ionViewDidLoad() {
@@ -79,6 +83,7 @@ export class NoteViewPage {
         .subscribe(data => {
           var res = data.json();
           var base64 = res["notes"];
+          // this.base64 = base64;
           this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
         })
 
@@ -92,4 +97,10 @@ export class NoteViewPage {
   }
 
 
+}
+
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
 }
