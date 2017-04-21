@@ -20,6 +20,7 @@ import {UploadingPage} from '../uploading/uploading';
 })
 export class AboutPage {
 	images: Array<string> = [];
+  
 	public base64Image: string; //unused var, delete?
 	public form = this.fb.group({
 		  title: ["", Validators.required],
@@ -65,6 +66,15 @@ export class AboutPage {
 
 
 makePostRequest() {
+  console.log("this is ", this.images, " and images is ", this.images.length == 0);
+
+  if (this.images.length == 0){
+    alert("No image selected.");
+
+  }
+  else{
+
+
 
 	var data1 = {
 				'notes': this.images[0],
@@ -93,12 +103,18 @@ makePostRequest() {
     }, error => {
         console.log(JSON.stringify(error.json()));
     });
+    var previewIMG = document.getElementById("preview");
+    previewIMG.innerHTML = "";
 
     this.navCtrl.push(UploadingPage);
     // This may not be the best way to load it, try passing it  via navCtrl
     var base64image = document.getElementById("upload_img");
     base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
 
+    this.form.reset();
+    this.images = [];
+
+  }
 }}
 
 
