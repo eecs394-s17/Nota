@@ -82,11 +82,12 @@ makePostRequest() {
 				'course': this.form.value.course,
 				'description': this.form.value.description,
 				'price': this.form.value.price,
-        'user_id': 5 //we want to grab id from localStorage?
+        'user_id': localStorage.getItem('id') //we want to grab id from localStorage?
     };
     console.log(this.images[0]);
 
     console.log(data1);
+
 
 
 

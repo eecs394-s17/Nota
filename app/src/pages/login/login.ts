@@ -95,6 +95,7 @@ export class LoginPage {
             if (credentials.password == res["users"][i]["password"]) {
 
               // setting the userid
+              console.log("I have a crush on this user: ", res["users"][i])
               localStorage.setItem('id', res["users"][i]["id"]);
               this.nav.setRoot(TabsPage);
 
