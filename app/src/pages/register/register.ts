@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import {TabsPage} from "../tabs/tabs";
+import {LoginPage} from "../login/login";
 
 import { Http } from '@angular/http';
 
@@ -21,7 +21,7 @@ export class RegisterPage {
         this.createSuccess = true;
         this.makePostRequest();
           this.showPopup("Success", "Account created.");
-          this.nav.push(TabsPage);
+          this.nav.push(LoginPage);
 
       } else {
         this.showPopup("Error", "Problem creating account.");

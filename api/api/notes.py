@@ -119,7 +119,7 @@ class Notes(Resource):
         args = parser.parse_args()
 
         course = args["course"]
-        upload_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        upload_date = datetime.datetime.now().strftime('%b %d %Y %I:%M %p')
         price = args["price"]
         title = args["title"]
         notes = args["notes"]

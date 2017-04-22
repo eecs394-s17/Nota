@@ -1,8 +1,18 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>
-      PROFILE
+      Profile
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logout()">
+        LOGOUT
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +21,7 @@
     <ion-list-header>Download History</ion-list-header>
     <ion-item>
       <ion-icon name="ionic" item-left></ion-icon>
-        EECS 359
+        ECON-310
     </ion-item>
   </ion-list>
 </ion-content>
