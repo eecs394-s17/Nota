@@ -58,54 +58,54 @@ export class NoteViewPage {
 
 
 
-  download() {
-    const fileTransfer = new TransferObject();
-    let targetPath;
-    // if(!this.platform.is('cordova')) {
-    //       return false;
-    // }
-    // if (this.platform.is('ios')) {
+//   download() {
+//     const fileTransfer = new TransferObject();
+//     let targetPath;
+//     // if(!this.platform.is('cordova')) {
+//     //       return false;
+//     // }
+//     // if (this.platform.is('ios')) {
       
-    targetPath = this.file.documentsDirectory + "yo.jpg";
-        // }
-    // else if(this.platform.is('android')) {
-    //       targetPath = this.file.dataDirectory + this.noteID;
-    // }
-    // console.log("encod   becomes ", encodeURI(atob(this.base64)));
-    var image = this.base64;
-    // var ext = image.split(';')[0].match(/jpeg|png|gif/)[0];
-    // var buf = new Buffer(image, 'base64');
-    // console.log("buf is ", buf);
-    // this.file.writeFile(this.file.documentsDirectory, "test.jpg", atob(image));
-    console.log(targetPath);
-    // console.log(this.noteID);
-    var url = "http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png";
-    fileTransfer.download(url, targetPath);
+//     targetPath = this.file.documentsDirectory + "yo.jpg";
+//         // }
+//     // else if(this.platform.is('android')) {
+//     //       targetPath = this.file.dataDirectory + this.noteID;
+//     // }
+//     // console.log("encod   becomes ", encodeURI(atob(this.base64)));
+//     var image = this.base64;
+//     // var ext = image.split(';')[0].match(/jpeg|png|gif/)[0];
+//     // var buf = new Buffer(image, 'base64');
+//     // console.log("buf is ", buf);
+//     // this.file.writeFile(this.file.documentsDirectory, "test.jpg", atob(image));
+//     console.log(targetPath);
+//     // console.log(this.noteID);
+//     var url = "http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png";
+//     fileTransfer.download(url, targetPath);
 
-    fileTransfer.download(url, targetPath).then((entry) => {
+//     fileTransfer.download(url, targetPath).then((entry) => {
 
-        const alertSuccess = this.alertCtrl.create({
-          title: `Download Succeeded!`,
-          subTitle: `${image} was successfully downloaded to: ${entry.toURL()}`,
-          buttons: ['Ok']
-        });
+//         const alertSuccess = this.alertCtrl.create({
+//           title: `Download Succeeded!`,
+//           subTitle: `${image} was successfully downloaded to: ${entry.toURL()}`,
+//           buttons: ['Ok']
+//         });
 
-        alertSuccess.present();
+//         alertSuccess.present();
 
-      }, (error) => {
+//       }, (error) => {
 
-        const alertFailure = this.alertCtrl.create({
-          title: `Download Failed!`,
-          subTitle: `${image} was not successfully downloaded. Error code: ${error.code}`,
-          buttons: ['Ok']
-        });
+//         const alertFailure = this.alertCtrl.create({
+//           title: `Download Failed!`,
+//           subTitle: `${image} was not successfully downloaded. Error code: ${error.code}`,
+//           buttons: ['Ok']
+//         });
 
-        alertFailure.present();
+//         alertFailure.present();
 
-      });
+//       });
 
   
-}
+// }
 
   goToPayment() {
     let noteDict = { "notes":this.base64};
@@ -144,8 +144,4 @@ export class NoteViewPage {
 
 }
 
-function b64DecodeUnicode(str) {
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
+
