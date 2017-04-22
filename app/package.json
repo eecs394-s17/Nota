@@ -27,6 +27,7 @@
     "@ionic-native/transfer": "^3.5.0",
     "@ionic/cloud-angular": "^0.11.0",
     "@ionic/storage": "2.0.0",
+    "fs": "0.0.1-security",
     "ionic-angular": "2.3.0",
     "ionic-native": "^2.9.0",
     "ionic2-super-tabs": "^1.1.1",
