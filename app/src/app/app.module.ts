@@ -15,8 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { AuthService } from '../providers/auth-service';
-
-
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
