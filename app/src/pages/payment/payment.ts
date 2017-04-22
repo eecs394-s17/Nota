@@ -15,6 +15,7 @@ import * as $ from 'jquery';
 })
 export class PaymentPage {
   require : any;
+  link: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -39,6 +40,7 @@ export class PaymentPage {
           //console.log(response);
           var photo = response.data.link;
           console.log(photo);
+          link = photo;
           var photo_hash = response.data.deletehash;
         },
         cache: false,
