@@ -4,7 +4,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 // import {Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
-// import { File } from '@ionic-native/file';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -22,7 +22,7 @@ declare var cordova: any;
 @Component({
   selector: 'page-note-view',
   templateUrl: 'note-view.html',
-  // providers: [File]
+  providers: [Base64ToGallery]
 
 })
 export class NoteViewPage {
@@ -34,10 +34,10 @@ export class NoteViewPage {
   note:any;
   description:string = "";
   noteID:number;
-  // base64:string = "";
+  base64:string = "";
 
 
-  constructor(private _domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
+  constructor(private _domSanitizer: DomSanitizer, private base64ToGallery: Base64ToGallery, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
 //       console.log('Platform ready from', readySource);
 //       this.http.get("http://127.0.0.1:5000/api/v1/notes")
@@ -55,18 +55,13 @@ export class NoteViewPage {
 
 
 
-  // download(){
-  //   // const url = 'http://www.jqueryscript.net/images/Dynamic-Horizontal-Vertical-Image-Slider-Plugin-slideBox.jpg';
-  //   // this.file.createFile(this.file.documentsDirectory, "filename", true);
-  //   console.log("test");
-  //   this.file.removeFile(this.file.documentsDirectory, "filename.jpeg"); 
-  //   var error = this.file.writeFile(this.file.documentsDirectory, "filename.jpeg", b64DecodeUnicode(this.base64), {append: false, replace: true});
-  //   console.log(this.base64);
-  //   console.log("ERRORS:");
-  //   console.log(this.file.cordovaFileError);
-  //   console.log(error);
+  download(){
+    this.base64ToGallery.base64ToGallery(this.base64, { prefix: '_img', mediaScanner: true }).then(
+      res => console.log('Saved image to gallery ', res),
+      err => console.log('Error saving image to gallery ', err)
+    );
 
-  // }
+  }
 
 
   ionViewDidLoad() {
@@ -83,7 +78,7 @@ export class NoteViewPage {
         .subscribe(data => {
           var res = data.json();
           var base64 = res["notes"];
-          // this.base64 = base64;
+          this.base64 = base64;
           this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
         })
 
