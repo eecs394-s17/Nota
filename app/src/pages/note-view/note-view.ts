@@ -10,7 +10,7 @@ import { File } from '@ionic-native/file';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
-
+import { PaymentPage } from '../payment/payment';
 import 'rxjs/add/operator/map'
 
 declare var FileUploadOptions: any;
@@ -50,7 +50,7 @@ export class NoteViewPage {
 //           //this.notes.push(res["notes"]); // Stores notes data from get request in notes
 //           console.log('yay notes in note-view')
 //   })
-    
+
 
 // })
   };
@@ -106,6 +106,11 @@ export class NoteViewPage {
   
 }
 
+  goToPayment() {
+    let noteDict = { "notes":this.base64};
+    this.navCtrl.push(PaymentPage,noteDict);
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NoteViewPage');
@@ -117,7 +122,7 @@ export class NoteViewPage {
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
     this.noteID = this.navParams.get('noteID');
 
-    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.noteID) 
+    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.noteID)
         .subscribe(data => {
           var res = data.json();
           var base64 = res["notes"];

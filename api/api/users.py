@@ -5,9 +5,11 @@ from flask import abort
 from utils import get_db
 from utils import dict_factory
 
+
+
 import os
 
-
+#change
 class Users(Resource):
 
     def get(self):
@@ -21,7 +23,7 @@ class Users(Resource):
         c = conn.cursor()
         c.execute("SELECT * FROM users WHERE id='" + str(1) + "'")
 
-    
+
 
         parser = reqparse.RequestParser()
 
@@ -50,7 +52,7 @@ class Users(Resource):
             abort(400)
 
 
-       
+
 
         # CASE 2: Check email and password
         parser.add_argument("id", type=str, location='headers', required=False)
