@@ -64,7 +64,8 @@ export class NoteViewPage {
   }
 
   goToPayment() {
-    this.navCtrl.push(PaymentPage);
+    let noteDict = { "notes":this.base64};
+    this.navCtrl.push(PaymentPage,noteDict);
   }
 
 
