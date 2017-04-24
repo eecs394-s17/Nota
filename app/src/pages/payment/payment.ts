@@ -32,6 +32,9 @@ export class PaymentPage {
   getImgurUrl() {
       //var formData = new FormData();
       //console.log(this.navParams.get("notes"));
+
+      var self = this;
+
       var img = this.navParams.get("notes");
       $.ajax({
         url: "http://api.imgur.com/3/image",
@@ -42,20 +45,21 @@ export class PaymentPage {
         },
         data: img,
         success: function(response) {
-          //console.log(response);
-          //var photo = response.data.link;
-          //console.log(photo);
-          //link = photo;
+
           this.photoURL = response.data.link;
           console.log(this.photoURL);
           var photo_hash = response.data.deletehash;
+          self.download(this.photoURL);
+
+
+
         },
         cache: false,
         contentType: false,
         processData: false
       });
 
-      this.download(this.photoURL);
+      
 
 
   }
@@ -68,10 +72,9 @@ export class PaymentPage {
     // }
     // if (this.platform.is('ios')) {
       
-    targetPath = this.file.documentsDirectory + "yo.jpg";
-    url = "http://imgur.com/oBi9nEJ.jpg";
+    targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename 
+    // url = "http://imgur.com/oBi9nEJ.jpg";
     console.log(url);
-    // console.log(this.noteID);
 
 
     fileTransfer.download(url, targetPath).then((entry) => {
