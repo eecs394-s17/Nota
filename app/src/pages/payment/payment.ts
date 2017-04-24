@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 
@@ -23,7 +23,7 @@ export class PaymentPage {
   link: string;
   photoURL:string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
+  constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
@@ -67,12 +67,18 @@ export class PaymentPage {
    download(url) {
     const fileTransfer = new TransferObject();
     let targetPath;
-    // if(!this.platform.is('cordova')) {
-    //       return false;
-    // }
-    // if (this.platform.is('ios')) {
-      
-    targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename 
+    if(!this.platform.is('cordova')) {
+          return false;
+    }
+    if (this.platform.is('ios')) {
+      targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename 
+    }
+    else if (this.platform.is('android')) {
+      targetPath = this.file.dataDirectory + "yo.jpg"; // TODO: use real filename
+    }
+    else{
+      return false;
+    }
     // url = "http://imgur.com/oBi9nEJ.jpg";
     console.log(url);
 
