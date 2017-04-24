@@ -1,5 +1,8 @@
 # Blue Sample App
 
+
+RUN: ionic plugin add cordova-plugin-camera
+
 ## Install
 * install [Node and NPM](https://docs.npmjs.com/getting-started/installing-node)
 * install ionic and cordova
