@@ -90,6 +90,7 @@ export class NotesPage {
 
   launchNoteViewPage(item) {
     console.log("note view page launch")
+    console.log(item)
     this.navCtrl.push(NoteViewPage,item);
   }
 

@@ -110,6 +110,8 @@ export class NoteViewPage {
 
   goToPayment() {
     let noteDict = { "notes":this.base64, "note_id":this.note_id,"score":this.score};
+    console.log('noteDict is...')
+    console.log(noteDict)
     this.navCtrl.push(PaymentPage,noteDict);
   }
 
@@ -123,7 +125,7 @@ export class NoteViewPage {
     this.description = this.navParams.get('description');
     this.price = this.navParams.get('price');
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
-    this.note_id = this.navParams.get('note_id');
+    this.note_id = this.navParams.get('noteID');
     this.score = this.navParams.get('score');
 
     this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.note_id)
@@ -136,7 +138,7 @@ export class NoteViewPage {
 
 
     console.log("note is...:");
-    console.log(this.note);
+    //console.log(this.note);
   }
 
   public get image() {

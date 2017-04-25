@@ -62,10 +62,14 @@ export class PaymentPage {
 
   upvote()
   {
+    console.log("score is "+ this.navParams.get('score'))
+    console.log("note_id is "+ this.navParams.get('note_id'))
     var data1 = {
-          'score':this.navParams.get('score')+1 ,
+          'score':this.navParams.get('score')+1,
           'note_id': this.navParams.get('note_id') //we want to grab id from localStorage?
       };
+      console.log(data1)
+
     this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
@@ -77,7 +81,29 @@ export class PaymentPage {
     }, error => {
         console.log(JSON.stringify(error.json()));
     });
-    console.log("ya i just voted");
+    console.log("ya i just upvoted");
+  }
+
+  downvote()
+  {
+    var data1 = {
+          'score':this.navParams.get('score')-1,
+          'note_id': this.navParams.get('note_id') //we want to grab id from localStorage?
+      };
+      console.log(data1)
+      //"http://34.209.98.85:5000/api/v1/notes"
+    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+        .subscribe(data => {
+        // var alert = Alert.create({
+        //     title: "Data String",
+        //     subTitle: data.json().data,
+        //     buttons: ["close"]
+        // });
+        // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
+    }, error => {
+        console.log(JSON.stringify(error.json()));
+    });
+    console.log("ya i just down voted");
   }
 
    download(url) {
