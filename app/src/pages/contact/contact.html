@@ -9,8 +9,8 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="logout()">
-        LOGOUT
+      <button ion-button icon-only (click)="logout()" class="logout-button">
+        <i class="fa fa-sign-out fa-2x fa-rotate-20" aria-hidden="true"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -18,10 +18,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Download History</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-        ECON-310
-    </ion-item>
+
+    <ion-list>
+      <button class="info" ion-item *ngFor="let item of items" (click)="viewNote(item)">
+        <h2> {{item.course}}</h2>
+        <p>  {{item.title}}</p>
+        <p>  {{item.upload_date}}</p>
+        <p>  ${{item.price}}</p>
+
+      </button>
+
+    </ion-list>
+
   </ion-list>
 </ion-content>
