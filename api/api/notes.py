@@ -93,7 +93,8 @@ class Notes(Resource):
                             "price": row["price"],
                             "title": row["title"],
                             "description": row["description"],
-                            "user_id": row["user_id"]
+                            "user_id": row["user_id"],
+                            "score": row["score"]
                             }
 
             notes.append(current_notes)
@@ -117,30 +118,27 @@ class Notes(Resource):
         parser.add_argument("user_id", type=str, required=False)
         parser.add_argument("description", type=str, required=False)
         parser.add_argument("score", type=int, required=False)
+        parser.add_argument("note_id", type=int, required=False)
         args = parser.parse_args()
 
         course = args["course"]
         upload_date = datetime.datetime.now().strftime('%b %d %Y %I:%M %p')
         price = args["price"]
-        my_title = args["title"]
+        title = args["title"]
         notes = args["notes"]
         user_id = args["user_id"]
         description = args["description"]
-        my_score = args["score"]
-        print "before score"
-
-        if score != None:
-            print "we are in score"
+        score = args["score"]
+        note_id = args["note_id"]
+        if score != None and note_id != None:
             conn = get_db()
             conn.row_factory = dict_factory
             c = conn.cursor()
-            c.execute("UPDATE notes SET (score=my_score) WHERE (title=my_title) VALUES(?,?)", (my_score, my_title))
+            #print "UPDATE notes SET score= {0} WHERE id={1}".format(score,note_id)
+            c.execute("UPDATE notes SET score= {0} WHERE id={1}".format(score,note_id));
             conn.commit()
-            return {"id": score }
-        print "past score"
+            return {"score": score }
 
-
-            # UPDATE table_name
 
 
 
@@ -165,7 +163,7 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id) VALUES (?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id))
+        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id, score) VALUES (?,?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id,score))
         conn.commit()
 
         last_row_id = c.lastrowid
