@@ -16,7 +16,7 @@ import { NoteViewPage } from '../note-view/note-view';
 // AKA NotesPage
 export class NotesPage {
 	notes: Array<string> = [];
-  items: Array<{title: string, course: string, upload_date: string, price: string, description: string, noteID: number}>;
+  items: Array<{title: string, course: string, upload_date: string, price: string, description: string, noteID: number, score: number}>;
 	posts: any;
 
   constructor(public navCtrl: NavController, public http: Http, public plt: Platform,) {
@@ -79,7 +79,8 @@ export class NotesPage {
               upload_date: all_notes[i].upload_date,
               price: all_notes[i].price,
               description: all_notes[i].description,
-              noteID: all_notes[i].id
+              noteID: all_notes[i].id,
+              score: all_notes[i].score
             });
 
           }

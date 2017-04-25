@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
-
+import { Http } from '@angular/http';
 import * as $ from 'jquery';
 
 declare var window: any;
@@ -23,7 +23,7 @@ export class PaymentPage {
   link: string;
   photoURL:string = "";
 
-  constructor(public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
+  constructor(public http: Http,public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
@@ -58,10 +58,26 @@ export class PaymentPage {
         contentType: false,
         processData: false
       });
+  }
 
-      
-
-
+  upvote()
+  {
+    var data1 = {
+          'score':this.navParams.get('score')+1 ,
+          'note_id': this.navParams.get('note_id') //we want to grab id from localStorage?
+      };
+    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+        .subscribe(data => {
+        // var alert = Alert.create({
+        //     title: "Data String",
+        //     subTitle: data.json().data,
+        //     buttons: ["close"]
+        // });
+        // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
+    }, error => {
+        console.log(JSON.stringify(error.json()));
+    });
+    console.log("ya i just voted");
   }
 
    download(url) {
@@ -71,7 +87,7 @@ export class PaymentPage {
           return false;
     }
     if (this.platform.is('ios')) {
-      targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename 
+      targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename
     }
     else if (this.platform.is('android')) {
       targetPath = this.file.dataDirectory + "yo.jpg"; // TODO: use real filename
@@ -111,7 +127,7 @@ export class PaymentPage {
       function onSaveImageSuccess() {
     console.log('--------------success');
 }
-                                            
+
       function onSaveImageError(error) {
           console.log('--------------error: ' + error);
       }
