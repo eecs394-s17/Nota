@@ -110,21 +110,41 @@ class Notes(Resource):
         """
 
         parser = reqparse.RequestParser()
-        parser.add_argument("title", type=str, required=True)
-        parser.add_argument("course", type=str, required=True)
-        parser.add_argument("price", type=str, required=True)
-        parser.add_argument("notes", type=str, required=True)
-        parser.add_argument("user_id", type=str, required=True)
+        parser.add_argument("title", type=str, required=False)
+        parser.add_argument("course", type=str, required=False)
+        parser.add_argument("price", type=str, required=False)
+        parser.add_argument("notes", type=str, required=False)
+        parser.add_argument("user_id", type=str, required=False)
         parser.add_argument("description", type=str, required=False)
+        parser.add_argument("score", type=int, required=False)
         args = parser.parse_args()
 
         course = args["course"]
         upload_date = datetime.datetime.now().strftime('%b %d %Y %I:%M %p')
         price = args["price"]
-        title = args["title"]
+        my_title = args["title"]
         notes = args["notes"]
         user_id = args["user_id"]
         description = args["description"]
+        my_score = args["score"]
+        print "before score"
+
+        if score != None:
+            print "we are in score"
+            conn = get_db()
+            conn.row_factory = dict_factory
+            c = conn.cursor()
+            c.execute("UPDATE notes SET (score=my_score) WHERE (title=my_title) VALUES(?,?)", (my_score, my_title))
+            conn.commit()
+            return {"id": score }
+        print "past score"
+
+
+            # UPDATE table_name
+
+
+
+
 
 
         if description == None:
