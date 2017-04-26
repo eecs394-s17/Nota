@@ -13,7 +13,7 @@ except:
     os.mkdir("database")
 
 # try to create the notes table
-notes_table = "CREATE TABLE notes (id integer primary key autoincrement, filename text, upload_date text, course text, title text, price text, description text, user_id text, constraint unique_filename UNIQUE (filename), foreign key(user_id) references users(id))"
+notes_table = "CREATE TABLE notes (id integer primary key autoincrement, filename text, upload_date text, course text, title text, price text, description text, user_id text,score integer, constraint unique_filename UNIQUE (filename), foreign key(user_id) references users(id))"
 users_table = "CREATE TABLE users (id integer primary key autoincrement, email text, password text, constraint unique_email UNIQUE (email))"
 
 try:

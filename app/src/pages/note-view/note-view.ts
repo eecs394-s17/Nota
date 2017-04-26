@@ -35,8 +35,9 @@ export class NoteViewPage {
   price:string = "";
   note:any;
   description:string = "";
-  noteID:number;
+  note_id:number;
   base64:string = "";
+  score:number;
 
 
   constructor(private _domSanitizer: DomSanitizer, public alertCtrl: AlertController, private file: File, private transfer: Transfer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
@@ -65,7 +66,7 @@ export class NoteViewPage {
 //     //       return false;
 //     // }
 //     // if (this.platform.is('ios')) {
-      
+
 //     targetPath = this.file.documentsDirectory + "yo.jpg";
 //         // }
 //     // else if(this.platform.is('android')) {
@@ -104,11 +105,13 @@ export class NoteViewPage {
 
 //       });
 
-  
+
 // }
 
   goToPayment() {
-    let noteDict = { "notes":this.base64};
+    let noteDict = { "notes":this.base64, "note_id":this.note_id,"score":this.score};
+    console.log('noteDict is...')
+    console.log(noteDict)
     this.navCtrl.push(PaymentPage,noteDict);
   }
 
@@ -122,9 +125,10 @@ export class NoteViewPage {
     this.description = this.navParams.get('description');
     this.price = this.navParams.get('price');
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
-    this.noteID = this.navParams.get('noteID');
+    this.note_id = this.navParams.get('noteID');
+    this.score = this.navParams.get('score');
 
-    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.noteID)
+    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.note_id)
         .subscribe(data => {
           var res = data.json();
           var base64 = res["notes"];
@@ -134,7 +138,7 @@ export class NoteViewPage {
 
 
     console.log("note is...:");
-    console.log(this.note);
+    //console.log(this.note);
   }
 
   public get image() {
@@ -143,5 +147,3 @@ export class NoteViewPage {
 
 
 }
-
-

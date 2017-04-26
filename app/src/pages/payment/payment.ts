@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
-
+import { Http } from '@angular/http';
 import * as $ from 'jquery';
 
 declare var window: any;
@@ -23,7 +23,9 @@ export class PaymentPage {
   link: string;
   photoURL:string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
+
+
+  constructor(public http: Http,public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
@@ -32,6 +34,9 @@ export class PaymentPage {
   getImgurUrl() {
       //var formData = new FormData();
       //console.log(this.navParams.get("notes"));
+
+      var self = this;
+
       var img = this.navParams.get("notes");
       $.ajax({
         url: "http://api.imgur.com/3/image",
@@ -42,36 +47,88 @@ export class PaymentPage {
         },
         data: img,
         success: function(response) {
-          //console.log(response);
-          //var photo = response.data.link;
-          //console.log(photo);
-          //link = photo;
+
           this.photoURL = response.data.link;
           console.log(this.photoURL);
           var photo_hash = response.data.deletehash;
+          self.download(this.photoURL);
+
+
+
         },
         cache: false,
         contentType: false,
         processData: false
       });
+  }
 
-      this.download(this.photoURL);
+  upvote()
+  {
+    console.log("score is "+ this.navParams.get('score'))
+    console.log("note_id is "+ this.navParams.get('note_id'))
+    var data1 = {
+          'score':this.navParams.get('score')+1,
+          'note_id': this.navParams.get('note_id') //we want to grab id from localStorage?
+      };
+      console.log(data1)
 
+    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+        .subscribe(data => {
+        // var alert = Alert.create({
+        //     title: "Data String",
+        //     subTitle: data.json().data,
+        //     buttons: ["close"]
+        // });
+        // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
+    }, error => {
+        console.log(JSON.stringify(error.json()));
+    });
+    console.log("ya i just upvoted");
+
+    document.getElementById("afterVote").innerHTML = "Thanks for Voting!"
+  }
+
+  downvote()
+  {
+    var data1 = {
+          'score':this.navParams.get('score')-1,
+          'note_id': this.navParams.get('note_id') //we want to grab id from localStorage?
+      };
+      console.log(data1)
+      //"http://34.209.98.85:5000/api/v1/notes"
+    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+        .subscribe(data => {
+        // var alert = Alert.create({
+        //     title: "Data String",
+        //     subTitle: data.json().data,
+        //     buttons: ["close"]
+        // });
+        // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
+    }, error => {
+        console.log(JSON.stringify(error.json()));
+    });
+    console.log("ya i just down voted");
+    document.getElementById("afterVote").innerHTML = "Thanks for Voting!"
 
   }
 
    download(url) {
     const fileTransfer = new TransferObject();
     let targetPath;
-    // if(!this.platform.is('cordova')) {
-    //       return false;
-    // }
-    // if (this.platform.is('ios')) {
-      
-    targetPath = this.file.documentsDirectory + "yo.jpg";
-    url = "http://imgur.com/oBi9nEJ.jpg";
+    if(!this.platform.is('cordova')) {
+          return false;
+    }
+    if (this.platform.is('ios')) {
+      targetPath = this.file.documentsDirectory + "yo.jpg"; // TODO: use real filename
+    }
+    else if (this.platform.is('android')) {
+      targetPath = this.file.dataDirectory + "yo.jpg"; // TODO: use real filename
+    }
+    else{
+      return false;
+    }
+    // url = "http://imgur.com/oBi9nEJ.jpg";
     console.log(url);
-    // console.log(this.noteID);
 
 
     fileTransfer.download(url, targetPath).then((entry) => {
@@ -102,7 +159,7 @@ export class PaymentPage {
       function onSaveImageSuccess() {
     console.log('--------------success');
 }
-                                            
+
       function onSaveImageError(error) {
           console.log('--------------error: ' + error);
       }
