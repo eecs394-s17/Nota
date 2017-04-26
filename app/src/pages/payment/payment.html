@@ -16,10 +16,14 @@
 
 
 <ion-content padding>
-  <h1>Default Stripe Form</h1>
+  <h1>Download And Vote!</h1>
 
 
   <button ion-button (click)="getImgurUrl()" color="secondary">Download image</button>
-  <button ion-button (click)="upvote()" color="secondary">Upvote</button>
-  <button ion-button (click)="downvote()" color="secondary">Downvote</button>
+  <br>
+  <button ion-button color="secondary" (click)="upvote()" >Upvote</button>
+  <button ion-button color="secondary" (click)="downvote()">Downvote</button>
+  <br>
+  <br>
+  <h2 color = "primary" id="afterVote"></h2>
 </ion-content>

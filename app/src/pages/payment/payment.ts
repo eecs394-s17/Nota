@@ -23,6 +23,8 @@ export class PaymentPage {
   link: string;
   photoURL:string = "";
 
+
+
   constructor(public http: Http,public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
@@ -82,6 +84,8 @@ export class PaymentPage {
         console.log(JSON.stringify(error.json()));
     });
     console.log("ya i just upvoted");
+
+    document.getElementById("afterVote").innerHTML = "Thanks for Voting!"
   }
 
   downvote()
@@ -104,6 +108,8 @@ export class PaymentPage {
         console.log(JSON.stringify(error.json()));
     });
     console.log("ya i just down voted");
+    document.getElementById("afterVote").innerHTML = "Thanks for Voting!"
+
   }
 
    download(url) {
