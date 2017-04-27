@@ -9,7 +9,7 @@ import { File } from '@ionic-native/file';
 // import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { FormBuilder, Validators } from '@angular/forms';
 import { PaymentPage } from '../payment/payment';
 import 'rxjs/add/operator/map'
 
@@ -28,6 +28,7 @@ declare var FileUploadOptions: any;
   providers: [File, Transfer, TransferObject]
 })
 export class NoteViewPage {
+
   item: {title: string, course: string, upload_date: string, price: string, note: string, description: string};
   title:string = "";
   course:string = "";
@@ -38,9 +39,14 @@ export class NoteViewPage {
   note_id:number;
   base64:string = "";
   score:number;
+  public form = this.fb.group({
+      passcode: ["", Validators.required]
+  });
 
 
-  constructor(private _domSanitizer: DomSanitizer, public alertCtrl: AlertController, private file: File, private transfer: Transfer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
+
+
+  constructor(public fb: FormBuilder, private _domSanitizer: DomSanitizer, public alertCtrl: AlertController, private file: File, private transfer: Transfer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
 //       console.log('Platform ready from', readySource);
 //       this.http.get("http://127.0.0.1:5000/api/v1/notes")

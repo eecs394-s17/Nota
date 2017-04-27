@@ -130,6 +130,7 @@ class Notes(Resource):
         description = args["description"]
         score = args["score"]
         note_id = args["note_id"]
+
         if score != None and note_id != None:
             conn = get_db()
             conn.row_factory = dict_factory
@@ -163,7 +164,7 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id, score) VALUES (?,?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id,score))
+        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id, score) VALUES (?,?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id,0))
         conn.commit()
 
         last_row_id = c.lastrowid

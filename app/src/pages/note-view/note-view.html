@@ -7,6 +7,8 @@
 
 </ion-header>
 
+
+
 <ion-content class='page'>
 <ion-grid>
   <ion-row>
@@ -20,7 +22,9 @@
   </ion-row>
 </ion-grid>
 
- <img [src]="image"/>
+
+ <img class= "blur" [src]="image"/>
+
 
   <p class="information">{{course}}</p>
   <p class="information">${{price}}</p>
@@ -28,11 +32,21 @@
   <p class="information">{{description}}</p>
   <p class="information">Vote Score: {{score}}</p>
 
-      <button ion-button (click)="goToPayment()" color="secondary">Buy image</button>
 
-      <a href="data:image/jpeg;base64,{{base64}}" download="filename.jpg">test</a>
+      <ion-list>
+        <form [formGroup]="form" (ngSubmit)="goToPayment()">
+          <ion-item>
+            <ion-label floating>Passcode</ion-label>
+            <ion-input formControlName="passcode" type="text"></ion-input>
+          </ion-item>
+          <button type="submit" color="secondary" ion-button block [disabled]="!form.valid" >Enter</button>
+          </form>
+      </ion-list>
 
 </ion-content>
+
+
+
 
 
   <!-- <p>{{note}} fdf</p> -->
