@@ -83,8 +83,8 @@ makePostRequest() {
 				'course': this.form.value.course,
 				'description': this.form.value.description,
 				'price': this.form.value.price,
-        'user_id': localStorage.getItem('id') //we want to grab id from localStorage?
-        // 'password': this.form.value.passcode
+        'user_id': localStorage.getItem('id'), //we want to grab id from localStorage?
+        'password': this.form.value.passcode
     };
     console.log(this.images[0]);
 
@@ -95,7 +95,7 @@ makePostRequest() {
 
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
 
-    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+    this.http.post("http://0.0.0.0:5000/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
