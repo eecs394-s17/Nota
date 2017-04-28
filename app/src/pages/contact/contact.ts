@@ -35,6 +35,25 @@ export class ContactPage {
     console.log('ionViewDidEnter b');
     this.items = [];
 
+    this.http.get("http://34.209.98.85:5000/api/v1/user?user_id="+localStorage.getItem("id"))
+        .subscribe(data => {
+          var res = data.json();
+          console.log(res);
+
+          var users = res["users"];
+          console.log(all_users.length);
+          for (let i = 0; i< all_users.length; i++){
+            console.log(all_users[i]);
+            this.items.push({
+              password: all_users[i].password,
+              id: all_users[i].id,
+              email: all_users[i].email,
+            });
+
+          }
+
+        });
+
     this.http.get("http://34.209.98.85:5000/api/v1/notes?user_id="+localStorage.getItem("id"))
         .subscribe(data => {
           var res = data.json();

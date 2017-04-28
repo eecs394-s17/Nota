@@ -1,24 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-
-    <ion-title>
-      Profile
-    </ion-title>
-
-    <ion-buttons end>
       <button ion-button icon-only (click)="logout()" class="logout-button">
         <i class="fa fa-sign-out fa-2x fa-rotate-20" aria-hidden="true"></i>
       </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-
+    <img id="profile-image" src="assets/icon/icon.png" width="90%" height="90%"/>
+    <h3 id="profile-name">Lindsay</h3>
     <ion-list>
       <button class="info" ion-item *ngFor="let item of items" (click)="viewNote(item)">
         <h2> {{item.course}}</h2>
@@ -27,8 +17,5 @@
         <p>  ${{item.price}}</p>
 
       </button>
-
-    </ion-list>
-
   </ion-list>
 </ion-content>
