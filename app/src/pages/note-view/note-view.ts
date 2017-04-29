@@ -38,6 +38,7 @@ export class NoteViewPage {
   description:string = "";
   note_id:number;
   base64:string = "";
+  realPwd:string = "";
   score:number;
   public form = this.fb.group({
       passcode: ["", Validators.required]
@@ -116,15 +117,23 @@ export class NoteViewPage {
 
   goToPayment() {
     let noteDict = { "notes":this.base64, "note_id":this.note_id,"score":this.score};
-    console.log('noteDict is...')
-    console.log(noteDict)
-    this.navCtrl.push(PaymentPage,noteDict);
+    console.log('noteDict is...', noteDict)
+    console.log("password is ", this.form.value.passcode, " and real pwd is ", this.realPwd)
+    if(this.form.value.passcode == this.realPwd) {
+      console.log("password is correct, access note")
+      this.navCtrl.push(PaymentPage,noteDict);
+    }
+    else {
+      console.log("password is incorrect");
+    }
+    
   }
 
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NoteViewPage');
+    console.log("navparams are ", this.navParams)
     this.title = this.navParams.get('title');
     this.course = this.navParams.get('course');
     this.upload_date = this.navParams.get('upload_date');
@@ -132,11 +141,12 @@ export class NoteViewPage {
     this.price = this.navParams.get('price');
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
     this.note_id = this.navParams.get('noteID');
-    this.score = this.navParams.get('score');
 
     this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.note_id)
         .subscribe(data => {
+          console.log("data obtained is ", data)
           var res = data.json();
+          this.realPwd = res["password"];
           var base64 = res["notes"];
           this.base64 = base64;
           this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
