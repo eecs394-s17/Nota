@@ -14,6 +14,7 @@
   <ion-row>
     <ion-col col-9>
        <h3>{{title}}</h3>
+       <p id="course">{{course}}</p>
     </ion-col>
 
     <ion-col id = "price" col-3 >
@@ -24,11 +25,10 @@
 
 
  <img class= "blur" [src]="image"/>
+  <p id="date">{{upload_date}}</p>
 
-
-  <p class="information">{{course}}</p>
-  <p class="information">${{price}}</p>
-  <p class="information">{{upload_date}}</p>
+  
+  
   <p class="information">{{description}}</p>
   <p class="information">Vote Score: {{score}}</p>
 
@@ -39,7 +39,7 @@
             <ion-label floating>Passcode</ion-label>
             <ion-input formControlName="passcode" type="text"></ion-input>
           </ion-item>
-          <button type="submit" color="secondary" ion-button block [disabled]="!form.valid" >Enter</button>
+          <button type="submit" color="secondary" ion-button block [disabled]="!form.valid" >Purchase</button>
           </form>
       </ion-list>
 
