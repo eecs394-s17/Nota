@@ -29,6 +29,21 @@ p{
 
 }
 
+#course, #date{
+  color: #a9a9a9;
+}
+
 button {
   color: #eaeaea !important;
+}
+
+.blur {
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+#blur_cover {
+width: inherit;
+height: inherit;
+  background-color: transparent;
 }

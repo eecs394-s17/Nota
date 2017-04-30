@@ -70,6 +70,7 @@ class Notes(Resource):
                                 "title": requested_notes["title"],
                                 "description": requested_notes["description"],
                                 "user_id": requested_notes["user_id"],
+                                "password": requested_notes["password"],
                                 "notes": notes_data
                               }
 
@@ -94,7 +95,8 @@ class Notes(Resource):
                             "title": row["title"],
                             "description": row["description"],
                             "user_id": row["user_id"],
-                            "score": row["score"]
+                            "score": row["score"],
+                            "password": row["password"]
                             }
 
             notes.append(current_notes)
@@ -119,6 +121,7 @@ class Notes(Resource):
         parser.add_argument("description", type=str, required=False)
         parser.add_argument("score", type=int, required=False)
         parser.add_argument("note_id", type=int, required=False)
+        parser.add_argument("password", type=str, required=False)
         args = parser.parse_args()
 
         course = args["course"]
@@ -130,6 +133,8 @@ class Notes(Resource):
         description = args["description"]
         score = args["score"]
         note_id = args["note_id"]
+        password = args["password"]
+
         if score != None and note_id != None:
             conn = get_db()
             conn.row_factory = dict_factory
@@ -163,7 +168,7 @@ class Notes(Resource):
         c = conn.cursor()
 
         # add the stuff to database
-        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id, score) VALUES (?,?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id,score))
+        c.execute("INSERT INTO notes (filename, upload_date, course, title, price, description, user_id, score, password) VALUES (?,?,?,?,?,?,?,?,?)", (unique_filename, upload_date, course, title, price, description, user_id,0, password))
         conn.commit()
 
         last_row_id = c.lastrowid

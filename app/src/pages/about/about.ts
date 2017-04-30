@@ -26,7 +26,8 @@ export class AboutPage {
 		  title: ["", Validators.required],
     	course: ["", Validators.required], //validator not working because submit button fires post function on click
     	description: ["", Validators.required],
-    	price: ["", Validators.compose([Validators.pattern('^[0-9]+$'),Validators.required])]
+    	price: ["", Validators.compose([Validators.pattern('^[0-9]+$'),Validators.required])],
+      passcode: ["", Validators.required]
       // images: [[], Validators.required]
 	});
 	uploadingPage = UploadingPage;
@@ -82,7 +83,8 @@ makePostRequest() {
 				'course': this.form.value.course,
 				'description': this.form.value.description,
 				'price': this.form.value.price,
-        'user_id': localStorage.getItem('id') //we want to grab id from localStorage?
+        'user_id': localStorage.getItem('id'), //we want to grab id from localStorage?
+        'password': this.form.value.passcode
     };
     console.log(this.images[0]);
 

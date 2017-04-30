@@ -9,7 +9,7 @@ import { File } from '@ionic-native/file';
 // import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
 
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { FormBuilder, Validators } from '@angular/forms';
 import { PaymentPage } from '../payment/payment';
 import 'rxjs/add/operator/map'
 
@@ -28,6 +28,7 @@ declare var FileUploadOptions: any;
   providers: [File, Transfer, TransferObject]
 })
 export class NoteViewPage {
+
   item: {title: string, course: string, upload_date: string, price: string, note: string, description: string};
   title:string = "";
   course:string = "";
@@ -37,10 +38,16 @@ export class NoteViewPage {
   description:string = "";
   note_id:number;
   base64:string = "";
+  realPwd:string = "";
   score:number;
+  public form = this.fb.group({
+      passcode: ["", Validators.required]
+  });
 
 
-  constructor(private _domSanitizer: DomSanitizer, public alertCtrl: AlertController, private file: File, private transfer: Transfer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
+
+
+  constructor(public fb: FormBuilder, private _domSanitizer: DomSanitizer, public alertCtrl: AlertController, private file: File, private transfer: Transfer, public navCtrl: NavController, public navParams: NavParams, public plt: Platform, public http: Http) {
 //     this.plt.ready().then((readySource) => {
 //       console.log('Platform ready from', readySource);
 //       this.http.get("http://127.0.0.1:5000/api/v1/notes")
@@ -110,15 +117,23 @@ export class NoteViewPage {
 
   goToPayment() {
     let noteDict = { "notes":this.base64, "note_id":this.note_id,"score":this.score};
-    console.log('noteDict is...')
-    console.log(noteDict)
-    this.navCtrl.push(PaymentPage,noteDict);
+    console.log('noteDict is...', noteDict)
+    console.log("password is ", this.form.value.passcode, " and real pwd is ", this.realPwd)
+    if(this.form.value.passcode == this.realPwd) {
+      console.log("password is correct, access note")
+      this.navCtrl.push(PaymentPage,noteDict);
+    }
+    else {
+      console.log("password is incorrect");
+    }
+    
   }
 
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NoteViewPage');
+    console.log("navparams are ", this.navParams)
     this.title = this.navParams.get('title');
     this.course = this.navParams.get('course');
     this.upload_date = this.navParams.get('upload_date');
@@ -126,11 +141,12 @@ export class NoteViewPage {
     this.price = this.navParams.get('price');
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
     this.note_id = this.navParams.get('noteID');
-    this.score = this.navParams.get('score');
 
     this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.note_id)
         .subscribe(data => {
+          console.log("data obtained is ", data)
           var res = data.json();
+          this.realPwd = res["password"];
           var base64 = res["notes"];
           this.base64 = base64;
           this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + base64);
