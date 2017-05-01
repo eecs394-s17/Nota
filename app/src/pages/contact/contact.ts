@@ -17,7 +17,8 @@ export class ContactPage {
 
   notes: Array<string> = [];
   items: Array<{title: string, course: string, upload_date: string, price: string, description: string, noteID: number}>;
-  posts: any;
+  user_items:Array<{id: string, email: string}>;
+    posts: any;
 
   constructor(public navCtrl: NavController, public http: Http, public plt: Platform,) {
     this.items = [];
@@ -41,13 +42,12 @@ export class ContactPage {
           console.log(res);
 
           var users = res["users"];
-          console.log(all_users.length);
-          for (let i = 0; i< all_users.length; i++){
-            console.log(all_users[i]);
-            this.items.push({
-              password: all_users[i].password,
-              id: all_users[i].id,
-              email: all_users[i].email,
+          console.log(users.length);
+          for (let i = 0; i< users.length; i++){
+            console.log(users[i]);
+            this.user_items.push({
+              id: users[i].id,
+              email: users[i].email,
             });
 
           }

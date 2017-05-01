@@ -8,10 +8,11 @@
 
 <ion-content no-padding>
 
+    <input type="text" id="myInput" (ngSubmit)="search()" placeholder="Search for names..">
 
-
-<ion-list>
+<ion-list id="myList">
 <button class="info" ion-item *ngFor="let item of items" (click)="launchNoteViewPage(item)">
+
     <h2> {{item.course}}</h2>
     <p>  {{item.title}}</p>
     <p>  {{item.upload_date}}</p>
