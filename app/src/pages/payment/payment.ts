@@ -72,7 +72,7 @@ export class PaymentPage {
       };
       console.log(data1)
 
-    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+    this.http.post("http://52.15.101.44:5000/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
@@ -96,7 +96,7 @@ export class PaymentPage {
       };
       console.log(data1)
       //"http://34.209.98.85:5000/api/v1/notes"
-    this.http.post("http://34.209.98.85:5000/api/v1/notes", data1)
+    this.http.post("http://52.15.101.44:5000/api/v1/notes", data1)
         .subscribe(data => {
         // var alert = Alert.create({
         //     title: "Data String",
