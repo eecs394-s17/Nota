@@ -143,7 +143,7 @@ export class NoteViewPage {
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
     this.note_id = this.navParams.get('noteID');
 
-    this.http.get("http://34.209.98.85:5000/api/v1/notes" + "?id=" + this.note_id)
+    this.http.get("http://52.15.101.44:5000/api/v1/notes" + "?id=" + this.note_id)
         .subscribe(data => {
           console.log("data obtained is ", data)
           var res = data.json();
