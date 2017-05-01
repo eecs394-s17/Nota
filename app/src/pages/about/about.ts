@@ -104,6 +104,7 @@ makePostRequest() {
           this.form.reset();
           this.images = [];
          loading.dismiss();
+         this.navCtrl.pop();
         // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
     }, error => {
         console.log(JSON.stringify(error.json()));
