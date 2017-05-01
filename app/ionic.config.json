@@ -5,6 +5,7 @@
   "typescript": true,
   "proxies": [{
   	"path": "/",
-  	"proxyUrl": "http://34.209.98.85:5000/api/v1/notes"
+  	"proxyUrl": "http://52.15.101.44:5000/api/v1/notes"
   }]
 }
+

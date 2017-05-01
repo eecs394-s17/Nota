@@ -36,7 +36,7 @@ export class ContactPage {
     console.log('ionViewDidEnter b');
     this.items = [];
 
-    this.http.get("http://34.209.98.85:5000/api/v1/user?user_id="+localStorage.getItem("id"))
+    this.http.get("http://52.15.101.44:5000/api/v1/user?user_id="+localStorage.getItem("id"))
         .subscribe(data => {
           var res = data.json();
           console.log(res);
@@ -54,7 +54,7 @@ export class ContactPage {
 
         });
 
-    this.http.get("http://34.209.98.85:5000/api/v1/notes?user_id="+localStorage.getItem("id"))
+    this.http.get("http://52.15.101.44:5000/api/v1/notes?user_id="+localStorage.getItem("id"))
         .subscribe(data => {
           var res = data.json();
           console.log(res);

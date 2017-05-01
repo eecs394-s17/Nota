@@ -60,7 +60,7 @@ export class NotesPage {
         this.items = [];
 
         // this.http.get("/api")
-        this.http.get("http://34.209.98.85:5000/api/v1/notes")
+        this.http.get("http://52.15.101.44:5000/api/v1/notes")
             .subscribe(data => {
                 var res = data.json();
                 console.log(res);
