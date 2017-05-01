@@ -120,6 +120,7 @@ export class NotesPage {
         // Declare variables
         var input, filter, list, li, a, i;
         input = document.getElementById('myInput');
+        input = this.search_string;
         filter = input.value.toUpperCase();
         list = document.getElementById("myList");
         li = list.getElementsByTagName('button');

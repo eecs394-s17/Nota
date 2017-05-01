@@ -18,16 +18,11 @@ page-home {
 	}
 
 	#myInput {
-		background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-		background-position: 10px 12px; /* Position the search icon */
-		background-repeat: no-repeat; /* Do not repeat the icon image */
-		width: 100%; /* Full-width */
-		font-size: 16px; /* Increase font-size */
-		padding: 12px 20px 12px 10px; /* Add some padding */
-		border: 1px solid #ddd; /* Add a grey border */
+		width: 80%;
+		font-size: 12px;
+		padding: 12px 20px 12px 10px;
+		border: 1px solid #ddd; 
 		font-family: 'Cantarell', sans-serif;
-		overflow: hidden;
-		padding-right: .5em;
 	}
 
 	#searcher{
