@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, Platform } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Platform, LoadingController } from 'ionic-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { Http } from '@angular/http';
@@ -25,7 +25,7 @@ export class PaymentPage {
 
 
 
-  constructor(public http: Http,public navCtrl: NavController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
+  constructor(public http: Http,public navCtrl: NavController, private loadingCtrl: LoadingController, public platform: Platform, public navParams: NavParams, private file: File, private transfer: Transfer, public alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentPage');
@@ -38,6 +38,11 @@ export class PaymentPage {
       var self = this;
 
       var img = this.navParams.get("notes");
+
+      let loading = this.loadingCtrl.create({
+    content: 'Please wait...'
+});
+      loading.present();
       $.ajax({
         url: "http://api.imgur.com/3/image",
         type: "POST",
@@ -52,6 +57,7 @@ export class PaymentPage {
           console.log(this.photoURL);
           var photo_hash = response.data.deletehash;
           self.download(this.photoURL);
+          loading.dismiss();
 
 
 
