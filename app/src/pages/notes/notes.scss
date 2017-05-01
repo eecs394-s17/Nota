@@ -1,31 +1,42 @@
 page-home {
 
+	h2{
+		font-family: 'Fjalla One', sans-serif;
+		color: #eae8e8;
+		text-transform: uppercase;
+		font-size: 1.5em !important;
+	}
+
+	p{
+		font-family: 'Cantarell', sans-serif;
+		color: lightgray;
+		font-size: 0.8em !important;
+	}
+
+	button{
+		background-color: #000000 !important;
+	}
+
+	#myInput {
+		background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+		background-position: 10px 12px; /* Position the search icon */
+		background-repeat: no-repeat; /* Do not repeat the icon image */
+		width: 100%; /* Full-width */
+		font-size: 16px; /* Increase font-size */
+		padding: 12px 20px 12px 10px; /* Add some padding */
+		border: 1px solid #ddd; /* Add a grey border */
+		font-family: 'Cantarell', sans-serif;
+		overflow: hidden;
+		padding-right: .5em;
+	}
+
+	#searcher{
+		width: 50px;
+		height: 20px;
+		background-color: yellow;
+		font-size: .2em;
+		color: green;
+	}
 }
 
-h2{
-	font-family: 'Fjalla One', sans-serif;
-	color: #eae8e8;
-	text-transform: uppercase;
-	font-size: 1.5em !important;
-}
 
-p{
-	font-family: 'Cantarell', sans-serif;
-	color: lightgray;
-	font-size: 0.8em !important;
-}
-
-button{
-	background-color: #000000 !important;
-}
-
-#myInput {
-	background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-	background-position: 10px 12px; /* Position the search icon */
-	background-repeat: no-repeat; /* Do not repeat the icon image */
-	width: 100%; /* Full-width */
-	font-size: 16px; /* Increase font-size */
-	padding: 12px 20px 12px 10px; /* Add some padding */
-	border: 1px solid #ddd; /* Add a grey border */
-    font-family: 'Cantarell', sans-serif;
-}
