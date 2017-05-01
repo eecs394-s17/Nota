@@ -2,7 +2,7 @@ import { Plugins } from '../../services/plugins.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 
 
 // import {Alert} from 'ionic-framework/ionic'; // no need for Page
@@ -11,6 +11,7 @@ import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 // import { Http} from '@angular/http';
+import {NotesPage} from '../notes/notes';
 import {UploadingPage} from '../uploading/uploading';
 
 
@@ -32,11 +33,12 @@ export class AboutPage {
 	});
 	uploadingPage = UploadingPage;
 
-  constructor(private http: Http, private navCtrl: NavController, private plugins: Plugins, public fb: FormBuilder) {
+  constructor(private http: Http, private navCtrl: NavController, private loadingCtrl: LoadingController, private plugins: Plugins, public fb: FormBuilder) {
   	this.http = http;
   	this.navCtrl = navCtrl;
 
   }
+
 
    openAlbums = () : void => {
         this.plugins.albums.open().then((imgUrls) => {
@@ -86,22 +88,22 @@ makePostRequest() {
         'user_id': localStorage.getItem('id'), //we want to grab id from localStorage?
         'password': this.form.value.passcode
     };
-    console.log(this.images[0]);
-
-    console.log(data1);
 
 
+    let loading = this.loadingCtrl.create({
+    content: 'Please wait...'
+  });
+    loading.present();
 
 
     // this.http.post("http://127.0.0.1:5000/api/v1/notes", data1)
 
     this.http.post("http://52.15.101.44:5000/api/v1/notes", data1)
         .subscribe(data => {
-        // var alert = Alert.create({
-        //     title: "Data String",
-        //     subTitle: data.json().data,
-        //     buttons: ["close"]
-        // });
+          this.navCtrl.push(NotesPage); 
+          this.form.reset();
+          this.images = [];
+         loading.dismiss();
         // this.nav.present(alert); // I guess this is deprecated line, see http://stackoverflow.com/questions/41932399/ionic2-property-present-does-not-exist-on-type-navcontroller
     }, error => {
         console.log(JSON.stringify(error.json()));
@@ -109,13 +111,12 @@ makePostRequest() {
     var previewIMG = document.getElementById("preview");
     previewIMG.innerHTML = "";
 
-    this.navCtrl.push(UploadingPage);
+    //this.navCtrl.push(UploadingPage);
     // This may not be the best way to load it, try passing it  via navCtrl
-    var base64image = document.getElementById("upload_img");
-    base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
+    //var base64image = document.getElementById("upload_img");
+    //base64image.innerHTML = "<img src='data:image/jpeg;base64,"+data1.notes+ "'>";
 
-    this.form.reset();
-    this.images = [];
+   
 
   }
 }}

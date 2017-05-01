@@ -113,8 +113,7 @@ export class LoginPage {
         console.log(res);
         //console.log("password2 in get request: " + this.password2);
         //this.checkCredentials();
-      },
-        (err) => alert("Email or Password is Wrong"))
+      })
   }
 
   checkCredentials() {
