@@ -139,6 +139,7 @@ export class NoteViewPage {
     this.upload_date = this.navParams.get('upload_date');
     this.description = this.navParams.get('description');
     this.price = this.navParams.get('price');
+    this.score = this.navParams.get('score');
     // this.note = this._domSanitizer.bypassSecurityTrustUrl("data:image/jpeg;base64," + this.navParams.get('note'));
     this.note_id = this.navParams.get('noteID');
 
