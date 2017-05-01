@@ -118,7 +118,6 @@ export class NotesPage {
 
 
 
-}
 
 // $scope.doThisFunction = function(){
 //     document.getElementById("test").innerHTML = "AJOOAOA";
@@ -142,3 +141,5 @@ export class NotesPage {
         }
     }
 };
+
+}
