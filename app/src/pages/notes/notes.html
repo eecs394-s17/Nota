@@ -7,12 +7,12 @@
 
 
 <ion-content no-padding>
-    <ion-item>
+<!--     <ion-item>
         <ion-item>
             <ion-input type="text" id="myInput" [value] = "search_string" [(ngModel)] = "search_string" placeholder="Search for names.." ></ion-input>
         </ion-item>
         <button full id="searcher" (click)="search()" style="float: right">search</button>
-    </ion-item>
+    </ion-item> -->
 <ion-list id="myList">
 <button class="info" ion-item *ngFor="let item of items" (click)="launchNoteViewPage(item)">
 
